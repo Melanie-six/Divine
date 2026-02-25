@@ -12,8 +12,14 @@
   --color-text-title: var(--champagne-gold);
 
   /* 字體設定 (Typography) */
-  --font-serif: 'Playfair Display', serif; /* 優雅標題 */
+  --font-serif: 'Playfair Display'; /* 優雅標題 */
   --font-mono: 'Fira Code', monospace;     /* 邏輯/代碼 */
+  --font-title: "Songti TC", "Source Han Serif TC";
+  --font-body: "PingFang TC", "Source Han Sans TC", "Microsoft JhengHei", sans-serif;
+}
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
 }
 
 .theme-dark {
@@ -23,6 +29,17 @@
 .heading-primary {
     font-family: var(--font-serif); 
     color: var(--color-accent);
+}
+.productcard-primary {
+    font-family: var(--font-serif); 
+    color: var(--color-text-main);
+    letter-spacing: 0.05em;
+    margin-top: 0.5rem;
+}
+.productcard-price {
+    font-family: var(--font-serif); 
+    color: var(--color-text-main);
+    opacity: 0.8;
 }
 .text-description {
     font-family: system-ui; 
@@ -41,4 +58,11 @@
     width: 100%;
     height: 200px;
     object-fit: cover;
+}
+
+.nav-link:hover, .nav-link:active {
+    color: var(--color-accent);
+}
+.navbar-brand:hover {
+    color: var(--color-accent);
 }
