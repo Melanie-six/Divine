@@ -8,6 +8,7 @@ import NotFound from "../views/frontend/NotFound";
 import AdminOrder from "../views/admin/AdminOrder";
 import AdminProduct from "../views/admin/AdminProduct";
 import AdminLayout from "../layout/AdminLayout";
+import SingleProduct from "../views/frontend/SingleProduct";
 
 
 
@@ -30,7 +31,10 @@ const routes = [
                 path: "products",
                 element: <Products />,
             },
-            
+            {
+                path: "product/:id",
+                element: <SingleProduct />,
+            },
             {
                 path: "cart",
                 element: <Cart />,

@@ -59,7 +59,9 @@ body {
     height: 200px;
     object-fit: cover;
 }
-
+.active {
+    color: var(--color-accent);
+}
 .nav-link:hover, .nav-link:active {
     color: var(--color-accent);
 }
