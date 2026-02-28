@@ -68,3 +68,148 @@ body {
 .navbar-brand:hover {
     color: var(--color-accent);
 }
+.main-image {
+    border: 1px solid var(--color-accent);
+    padding: 2px;
+    object-fit: cover;
+}
+.main-image-container {
+    border: 1px solid var(--color-accent);
+    padding: 15px;
+}
+.content-container {
+    border: 1px solid var(--color-accent);
+    padding: 20px;
+}
+.btn-add-to-cart {
+    display: block;
+    width: 100%;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    color: var(--color-text-title);
+    border: 1px solid var(--color-accent);
+    font-family: var(--font-serif); 
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.btn-add-to-cart:hover {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    font-weight: bold;
+}
+
+.num-control {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+/* 容器佈局 */
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 增減按鈕基礎樣式 */
+.btn-qty {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* 顏色與邊框 */
+  background-color: var(--color-text-main);     /* 米白色背景 */
+  border: 1px solid var(--color-accent);  /* 香檳金邊框 */
+  color: var(--color-accent);             /* 符號顏色 */
+  
+  /* 圓角與陰影：營造立體感 */
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 微弱陰影 */
+  
+  /* 字體設定 */
+  font-family: var(--font-mono);      /* 使用你選定的邏輯字體 */
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* 滑鼠觸碰效果 */
+.btn-qty:hover {
+  background-color: #fff;                   /* 變亮一點點 */
+  transform: translateY(-1px);              /* 輕微浮起 */
+  box-shadow: 0 4px 6px rgba(212, 175, 55, 0.2);
+}
+
+/* 點擊效果 */
+.btn-qty:active {
+  transform: translateY(0);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* 內凹感 */
+}
+
+.btn-qty:disabled {
+    opacity: 0.3;                    /* 降低透明度 */
+    cursor: not-allowed;             /* 滑鼠變更為禁止符號 */
+    filter: grayscale(1);            /* 移除金色感，變灰阶 */
+    border-style: dashed;            /* 甚至可以把實線邊框變虛線 */
+}
+
+/* 中間數字樣式 */
+.qty-number {
+  font-family: var(--font-mono);      /* 邏輯字體 */
+  font-size: 1.1rem;
+  min-width: 20px;
+  text-align: center;
+}
+.qty-label {
+  font-family: var(--font-mono);      /* 邏輯字體 */
+  font-size: 1.1rem;
+  min-width: 20px;
+  text-align: center;
+  transform: translateY(0.5px);
+  margin-right: 12px;
+}
+
+/* cart*/
+.cart-table {
+    background-color: var(--midnight-blue);
+    border: 2px solid var(--color-accent);
+    border-radius: 5px;
+    overflow: hidden; /* 確保內容不會超出圓角 */
+    font-family: var(--font-mono);
+    margin: 0 auto;
+    width: 100%;
+}
+.table-header {
+  background-color: var(--color-accent);
+  color: var(--midnight-blue);
+  font-size: 1.2rem;
+  font-family: var(--font-mono);
+}
+.cart-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+.table-body {
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.5); /* 半透明金色分隔線 */
+  color: var(--cream-white);
+  transition: background-color 0.3s;
+  &:hover {
+  background-color: rgba(255, 255, 255, 0.05); /* 滑過時微亮 */
+    }
+}
+.btn-del-qty {
+    color: var(--color-accent);  
+    opacity: 0.8;
+}
