@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import '../../assets/all.css';
+import { Link } from "react-router";
 
 
 const {VITE_API_BASE, VITE_API_PATH} = import.meta.env;
@@ -102,10 +103,11 @@ function Cart() {
                             </tr>
                         )})}
                 </tbody>
-                <tfoot>
-                    <tr className="h5">
+                <tfoot className="p-3">
+                    <tr className="h5 my-3">
                         <th colSpan="4" className="text-end"><strong>結帳總金額：</strong></th>
                         <th className="text-danger">{cart.final_total}</th>
+                        <th><Link to="/order" className="btn btn-add-to-cart">結帳去</Link></th>
                     </tr>
                 </tfoot>
             </table>

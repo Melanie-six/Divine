@@ -213,3 +213,26 @@ body {
     color: var(--color-accent);  
     opacity: 0.8;
 }
+.btn-add-to-order {
+    margin-top: 1rem;
+    display: block;
+    width: 100%;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    color: var(--color-text-title);
+    border: 1px solid var(--color-accent);
+    font-family: var(--font-serif); 
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 1rem;
+    &:hover {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    font-weight: bold;
+}
+}

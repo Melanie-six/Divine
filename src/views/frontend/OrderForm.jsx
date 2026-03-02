@@ -1,0 +1,195 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+
+const {VITE_API_BASE, VITE_API_PATH} = import.meta.env;
+
+
+function OrderForm() {
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },   
+    } = useForm({
+        mode: "onBlur"
+    });
+
+    const [cart, setCart] = useState([]);
+
+    const getCart = async () => {
+        try {
+            const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
+            setCart(res.data.data);
+            console.log(res.data.data);
+        } catch (error) {
+            console.log(error.response);
+        }
+    };
+
+    useEffect(() => {
+        getCart();
+    },[]);
+
+    const onSubmit = async (formData) => {
+        console.log(formData);
+        try {
+            const data = {
+                user: formData,
+                message: formData.message,
+            };
+            const res = await axios.post(`${VITE_API_BASE}/api/${VITE_API_PATH}/order`, {
+                data,
+            });
+            console.log(res.data);
+            const res2 = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
+            console.log(res2.data.data);
+            setCart(res2.data.data);
+        } catch (error) {
+            console.log(error.response)
+        };
+    };
+
+    return (<>
+        <div className="col-md-6 mx-auto">
+            <h3>訂單資訊(Order Info)</h3>
+            <table className="table">
+                <thead>
+                    <tr>
+                    <th scope="col">商品名稱</th>
+                    <th scope="col">單價</th>
+                    <th scope="col">數量</th>
+                    <th scope="col">小計</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {cart?.carts?.map((item) => {
+                        return (
+                        <tr key={item.id}>
+                            <th scope="row">{item.product.title}</th>
+                            <td>{item.product.price}</td>
+                            <td>{item.qty}</td>
+                            <td>{item.product.price * item.qty}</td>
+                        </tr>
+                        )
+                    })}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th scope="row" colSpan="3" className="text-end">總計</th>
+                        <td>{cart.final_total}</td>
+                    </tr>
+                </tfoot>
+                </table>
+        </div>
+        <div className="my-5">
+            
+            <form className="col-md-6 mx-auto" onSubmit={handleSubmit(onSubmit)}>
+                <h3>顧客資訊(Customer Info)</h3>
+                <div className="mb-3">
+                    <label htmlFor="name" className="form-label">
+                        收件者姓名(Name)
+                    </label>
+                    <input 
+                        id="name" 
+                        name="name"
+                        type="text" 
+                        className="form-control" 
+                        placeholder="請輸入收件者姓名"
+                        // defaultValue="姓名(Name)"
+                        {...register("name",{
+                            required: "請輸入收件者姓名",
+                            minLength: { 
+                                value: 2, 
+                                message: "姓名至少 2 個字" 
+                            },
+                        })} />
+                        {errors.name && (
+                            <p className="text-danger">{errors.name.message}</p>
+                        )}
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="email" className="form-label">
+                        聯絡信箱(Email)
+                    </label>
+                    <input 
+                        id="email" 
+                        name="email"
+                        type="email" 
+                        className="form-control" 
+                        placeholder="請輸入 E-mail"
+                        // defaultValue="聯絡信箱(Email)"
+                        {...register("email",{
+                            required: "請輸入 E-mail",
+                            pattern: {
+                                value: /^\S+@\S+$/i,
+                                message: "Email 格式不正確",
+                            },
+                        })} />
+                        {errors.email && (
+                            <p className="text-danger">{errors.email.message}</p>
+                        )}
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="tel" className="form-label">
+                        聯絡電話(Phone)
+                    </label>
+                    <input 
+                        id="tel" 
+                        name="tel"
+                        type="tel" 
+                        className="form-control" 
+                        placeholder="請輸入聯絡電話"
+                        // defaultValue="聯絡電話(Phone)"
+                        {...register("tel", {
+                            required: "請輸入聯絡電話",
+                            pattern: {
+                                value: /^\d+$/,
+                                message: "電話僅能輸入數字",
+                            },
+                            minLength: { 
+                                value: 8, 
+                                message: "電話至少 8 碼" 
+                            },
+                        })} />
+                        {errors.tel && (
+                            <p className="text-danger">{errors.tel.message}</p>
+                        )}
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="address" className="form-label">
+                        收件地址(Adress)
+                    </label>
+                    <input 
+                        id="address" 
+                        name="address"
+                        type="text" 
+                        className="form-control" 
+                        placeholder="請輸入收件地址"
+                        // defaultValue="收件地址(Adress)"
+                        {...register("address",{
+                            required: "請輸入收件地址",
+                        })} />
+                        {errors.address && (
+                            <p className="text-danger">{errors.address.message}</p>
+                        )}
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="message" className="form-label">
+                        留言
+                    </label>
+                    <textarea 
+                        id="message" 
+                        className="form-control" 
+                        cols="10"
+                        rows="5"
+                        placeholder="若有任何額外需求，請在此輸入"
+                        // defaultValue="若有任何額外需求，請在此輸入"
+                        {...register("message")} />
+                </div>
+                <button type="submit" className="btn btn-primary">送出訂單</button>
+            </form>
+        </div>
+    </>)
+};
+export default OrderForm;

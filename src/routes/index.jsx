@@ -9,6 +9,7 @@ import AdminOrder from "../views/admin/AdminOrder";
 import AdminProduct from "../views/admin/AdminProduct";
 import AdminLayout from "../layout/AdminLayout";
 import SingleProduct from "../views/frontend/SingleProduct";
+import OrderForm from "../views/frontend/OrderForm";
 
 
 
@@ -38,6 +39,10 @@ const routes = [
             {
                 path: "cart",
                 element: <Cart />,
+            },
+            {
+                path: "order",
+                element: <OrderForm />,
             },
             {
                 path: "login",
