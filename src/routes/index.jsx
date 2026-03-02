@@ -10,6 +10,7 @@ import AdminProduct from "../views/admin/AdminProduct";
 import AdminLayout from "../layout/AdminLayout";
 import SingleProduct from "../views/frontend/SingleProduct";
 import OrderForm from "../views/frontend/OrderForm";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 
 
@@ -52,7 +53,7 @@ const routes = [
     },
     {
         path: "/admin",
-        element: <AdminLayout />,
+        element: <ProtectedRoute><AdminLayout /></ProtectedRoute>,
         children: [
             {
                 path: "products",
