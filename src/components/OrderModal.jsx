@@ -117,10 +117,10 @@ function OrderModal ({modalType, templateData, isModalOpen, setIsModalOpen, getO
 
     return (
         <div className="modal" tabIndex="-1" ref={modalRef}>
-            <div className="modal-dialog">
+            <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                 <div className="modal-header">
-                    <h5 className="modal-title">Modal title</h5>
+                    <h5 className="modal-title">{modalType === 'del' ? '刪除訂單' : '訂單詳細資料' }</h5>
                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div className="modal-body">
@@ -128,19 +128,33 @@ function OrderModal ({modalType, templateData, isModalOpen, setIsModalOpen, getO
                     <p>確定要刪除<span className='text-danger'>{modalData.create_at}</span>這筆訂單嗎？</p>
                     </>) : (<>
                     <div className="mb-3">訂單編號：{modalData.create_at}</div>
-
-                    <div className="mb-3">
-                        <label 
-                            htmlFor="customerName" 
-                            className="form-label">顧客名稱</label>
-                        <input 
-                            name='name'
-                            type="text" 
-                            id="customerName" 
-                            className="form-control" 
-                            value={modalData.user.name}
-                            onChange={(e) => handleModalChange(e)} />
-                    </div> 
+                    <div className="row">
+                        <div className="mb-3 col-md-6">
+                            <label 
+                                htmlFor="customerName" 
+                                className="form-label">顧客名稱</label>
+                            <input 
+                                name='name'
+                                type="text" 
+                                id="customerName" 
+                                className="form-control" 
+                                value={modalData.user.name}
+                                onChange={(e) => handleModalChange(e)} />
+                        </div>
+                        <div className="mb-3 col-md-6">
+                            <label 
+                                htmlFor="customerTel" 
+                                className="form-label">顧客電話</label>
+                            <input 
+                                name='tel'
+                                type="tel" 
+                                id="customerTel" 
+                                className="form-control" 
+                                value={modalData.user.tel}
+                                onChange={(e) => handleModalChange(e)} />
+                        </div> 
+                    </div>
+                    
                     <div className="mb-3">
                         <label 
                             htmlFor="customerEmail" 
@@ -153,18 +167,7 @@ function OrderModal ({modalType, templateData, isModalOpen, setIsModalOpen, getO
                             value={modalData.user.email}
                             onChange={(e) => handleModalChange(e)} />
                     </div>
-                    <div className="mb-3">
-                        <label 
-                            htmlFor="customerTel" 
-                            className="form-label">顧客電話</label>
-                        <input 
-                            name='tel'
-                            type="tel" 
-                            id="customerTel" 
-                            className="form-control" 
-                            value={modalData.user.tel}
-                            onChange={(e) => handleModalChange(e)} />
-                    </div>
+                    
                     <div className="mb-3">
                         <label 
                             htmlFor="customerAddress" 
@@ -177,14 +180,54 @@ function OrderModal ({modalType, templateData, isModalOpen, setIsModalOpen, getO
                             value={modalData.user.address}
                             onChange={(e) => handleModalChange(e)} />
                     </div> 
+                    <div className="mb-3">
+                        <label 
+                            htmlFor="customerMessage" 
+                            className="form-label">顧客留言</label>
+                        <input 
+                            name='message'
+                            type="text" 
+                            id="customerMessage" 
+                            className="form-control" 
+                            value={modalData.message}
+                            onChange={(e) => handleModalChange(e)} />
+                    </div>
+                    <div className="mb-3 table-responsive">
+                        <table className="table align-middle">
+                            <thead>
+                                <tr>
+                                    <th>產品名稱</th>
+                                    <th>產品分類</th>
+                                    <th>數量</th>
+                                    <th>小計</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {modalData.products && Object.values(modalData.products).map((item) => (
+                                    <tr key={item.id}>
+                                        <td>{item.product?.title}</td>
+                                        <td>{item.product?.category}</td>
+                                        <td>{item.qty}</td>
+                                        <td>{item.final_total}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colSpan="3" className="text-end">訂單總金額</th>
+                                    <th>{modalData.total}</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div> 
                     </>)}              
                 </div>
                 <div className="modal-footer">
                     {modalType === 'del' ? (<>
                     <button type="button" className="btn btn-danger" onClick={() => delOrder(modalData.id)}>確定刪除</button>
                     </>) : (<>
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleCloseModal}>Close</button>
-                    <button type="button" className="btn btn-primary" onClick={() => updateOrder(modalData.id)}>Save changes</button>
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleCloseModal}>取消</button>
+                    <button type="button" className="btn btn-primary" onClick={() => updateOrder(modalData.id)}>儲存訂單變更</button>
                     </>) }
                     
                 </div>

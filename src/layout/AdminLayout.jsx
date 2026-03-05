@@ -1,11 +1,32 @@
 import Footer from "../components/Footer";
-import { Link, Outlet } from "react-router";
+import { Link, Outlet, useNavigate } from "react-router";
 import "../assets/all.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import useMessage from "../hooks/useMessage";
+import axios from "axios";
 
+const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
 
 function AdminLayout() {
+    const navigate = useNavigate();
+    const { showSuccess, showError } = useMessage();
+
+
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        try {
+        const response = await axios.post(`${VITE_API_BASE}/logout`);
+        } catch(error) {
+        showError("登出失敗");
+        } finally {
+        document.cookie = "hexToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        axios.defaults.headers.common['Authorization'] = '';
+        navigate("/login", { replace: true });
+        showSuccess("登出成功");
+        }
+    };
+
     return (<>
         <nav className="navbar navbar-expand-lg theme-dark ">
             <div className="container theme-dark ">
@@ -21,7 +42,12 @@ function AdminLayout() {
                         <Link className="nav-link theme-dark " to="/admin/orders">Orders</Link>
                     </div>
                     <div className="navbar-nav">
-                        <Link className="nav-link mx-3 theme-dark" to="login"><i className="bi bi-door-open-fill"></i>logout</Link>
+                        {/* <button type="button" className="nav-link btn btn-link text-danger" 
+                            onClick={handleLogout}
+                            style={{ textDecoration: 'none' }} >
+                            <i className="bi bi-door-open-fill"></i>logout
+                            </button> */}
+                        <button className="nav-link mx-3 theme-dark btn btn-link border-0" type="button" onClick={handleLogout} style={{ cursor: 'pointer' }}><i className="bi bi-door-open-fill"></i>logout</button>
                     </div>
                 </div>
             </div>

@@ -51,6 +51,7 @@ function AdminOrder() {
         try {
         const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/admin/orders?page=${page}`);
         setOrders(res.data.orders);
+        console.log(res.data.orders);
         showSuccess("訂單列表載入成功");
         setPageInfo(res.data.pagination);
         } catch (error) {
@@ -63,15 +64,17 @@ function AdminOrder() {
         <div className="container">
             <div className="col-md-12 my-3">
             <h2>訂單管理</h2>
-            <div className='d-flex flex-row-reverse me-5'>
-                <button type='button' className='btn btn-success'
-                >新增訂單</button>
+            <div className='d-flex flex-row-reverse me-5 my-3'>
+                <button type='button' className='btn btn-danger'
+                >刪除所有訂單</button>
             </div>
             <table className='table table-hover table-striped'>
                 <thead>
                 <tr>
                     <th>訂單編號</th>
+                    <th>建立時間</th>
                     <th>顧客名稱</th>
+                    <th>訂單金額</th>
                     <th>付款狀態</th>
                     <th>編輯</th>
                 </tr>
@@ -80,12 +83,16 @@ function AdminOrder() {
                     {orders.map((order) => {
                         return (
                             <tr key={order.id}>
-                            <td>{order.create_at}</td>
+                                <td>{order.create_at}</td>
+                            <td>{new Date(order.create_at * 1000).toLocaleDateString()}</td>
                             <td>{order.user.name}</td>
-                            <td>{order.is_paid ? "已付款" : "未付款"}</td>
+                            <td>{order.total}</td>
                             <td>
-                                <button type='button' className='btn btn-primary me-3 btn-sm' onClick={() => handleOpenModal("edit", order)}>編輯</button>
-                                <button type='button' className='btn btn-danger btn-sm' onClick={() => handleOpenModal("del", order)}>刪除</button>
+                                <span className={order.is_paid ? 'text-success' : 'text-danger'}>
+                                {order.is_paid ? "已付款" : "未付款"}</span></td>
+                            <td>
+                                <button type='button' className='btn btn-primary me-3 btn-sm' onClick={() => handleOpenModal("edit", order)}>查看編輯訂單</button>
+                                <button type='button' className='btn btn-danger btn-sm' onClick={() => handleOpenModal("del", order)}>刪除訂單</button>
                                 </td>
                             </tr>
                         )
