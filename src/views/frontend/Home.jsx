@@ -6,6 +6,7 @@ import 'swiper/css/pagination';
 import axios from 'axios';
 import { use, useEffect, useState } from 'react';
 import '../../assets/home.css'
+import { Link } from 'react-router';
 
 const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
@@ -34,7 +35,7 @@ function Home() {
                 <div className="subtitle">Handcrafted French Pâtisserie</div>
                 <p>在精準與感性之間，
                     誕生每一顆值得被細細品味的甜點。</p>
-                <button type="button" className='home-btn'>Explore the Collection</button>
+                <Link to="/products" type="button" className='home-btn'>Explore the Collection</Link>
             </div>
             <div className="philosophy mb-3 d-flex">
                 <div className="philosophy-left">
@@ -74,7 +75,7 @@ function Home() {
                                 <img className="card-img" src={product.imageUrl} alt={product.title} />
                                 <div className="card-content">
                                     <div className="card-title">{product.title}</div>
-                                    <button className="card-btn">View Details</button>
+                                    <Link to={`/products/${product.id}`} className="card-btn">View Details</Link>
                                 </div>
                             </div>
                         </SwiperSlide>
@@ -98,12 +99,12 @@ function Home() {
                 <div className="brandstory-title">The Story Behind Divine</div>
                 <div className="brandstory-content">Divine 的誕生，來自於兩個世界的交會：工程與甜點。</div>
                 <div className="brandstory-content mb-5">一個關於精準、創造與熱情的故事。</div>
-                <button className="brandstory-btn">Read Our Story</button>
+                <Link to="/about" className="brandstory-btn">Read Our Story</Link>
 
             </div>
             <div className="cta">
                 <div className="main-title">Experience Divine</div>
-                <button className='home-btn'>View Menu</button>
+                <Link to="/menu" className='home-btn'>View Menu</Link>
             </div>
         </div>
     )

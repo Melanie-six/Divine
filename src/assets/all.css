@@ -236,3 +236,13 @@ body {
     font-weight: bold;
 }
 }
+
+.footer-title {
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    color: var(--color-text-title);
+}
+footer {
+    border-top: 0.5px solid var(--color-accent);
+    border-bottom: 0.5px solid var(--color-accent);
+}

@@ -18,7 +18,7 @@ function Header () {
                     <div className="navbar-nav">
                         <Link className="nav-link theme-dark " aria-current="page" to="/">Home</Link>
                         <Link className="nav-link theme-dark " to="about">About</Link>
-                        <Link className="nav-link theme-dark " to="products">Products</Link>
+                        <Link className="nav-link theme-dark " to="products">Menu</Link>
                     </div>
                     <div className="navbar-nav">
                         <Link className="nav-link mx-2 theme-dark" to="cart"><i className="bi bi-cart3"></i></Link>
