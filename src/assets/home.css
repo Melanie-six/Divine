@@ -36,7 +36,7 @@
 .main-title {
     color: var(--color-text-title);
     font-family: var(--font-title);
-    font-size: 4rem;
+    font-size: 5rem;
 }
 
 .subtitle {
@@ -273,6 +273,11 @@ p {
     border: 1px solid var(--color-accent);
     padding: 3rem;
 }
+.cta-title {
+    color: var(--color-text-title);
+    font-family: var(--font-title);
+    font-size: 5rem;
+}
 
 @media (max-width: 768px) {
   .philosophy-title {
@@ -284,20 +289,108 @@ p {
   .philosophy-title-right  {
     font-size: 2.5rem;
   }
-  .artisan-container {
-    display: flex;
-    flex-direction: column;
-  }
-  .img-small {
-    transform: none;
-    width: 100%;
-  }
+  .signature {
+        padding: 1rem;
+        height: auto;    
+    }
+    .signature-title {
+        font-size: 3rem;
+    }
+    .card {
+        margin-bottom: 20px;
+    }
+    .card-title {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+    .artisan-container {
+        display: flex;
+        flex-direction: column;
+    }
+    .artisan {
+        height: auto;
+    }
+    .img-large {
+        height: 300px;
+        transform: translate(-5%, 10%);
+    }
+    .img-small {
+        height: 300px;
+        width: 60%;
+        transform: translate(40%, -10%);
+    }
+    .artisan-title {
+        font-size: 2.2rem;
+    }
+    .content {
+        padding-top: 0;
+        transform: translateY(0%); 
+    }
+    .cta-title {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
 }
 @media (max-width: 425px) {
     .main-title {
         font-size: 2.5rem;
     }
+    .subtitle {
+        font-size: 1.2rem;
+    }
+    p {
+        opacity: 0.8;
+    }
+    .home-btn {
+        padding: 0.5rem 1rem;
+    }
     .philosophy {
         flex-direction: column;
+        padding: 1rem;
+        height: auto;
     }
+    .philosophy-left {
+        width: 100%;
+        padding: 0 1rem;
+    }
+    .philosophy-right {
+        width: 100%;
+        padding: 1rem;
+    }
+    .philosophy-title {
+        font-size: 1.6rem;
+    }
+    .philosophy-title-right {
+        font-size: 2.2rem;
+    }
+    .signature-title {
+        font-size: 1.6rem;
+    }
+    .artisan-container {
+        padding: 1rem;
+    }
+    .img-large {
+        width: 100%;
+        height: 200px;
+        transform: none;
+    }
+    .img-small {
+        height: 200px;
+        width: 100%;
+        transform: none;
+    }
+    .artisan-title {
+        font-size: 1.7rem;
+    }
+    .brandstory-title {
+        font-size: 2rem;
+    }
+    .brandstory-content {
+        width: 80%;
+        text-align: center;  
+    }
+    .cta-title {
+        font-size: 2rem;
+    }
+    
 }

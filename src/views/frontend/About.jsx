@@ -34,7 +34,7 @@ function About() {
         <>
         <div className="container">
             <div className="hero">
-                <div className="main-title">Divine</div>
+                <div className="about-title">Divine</div>
                 <div className="sub-title">Handcrafted French Pâtisserie</div>
                 <div className="main-content">在精準與感性之間，誕生每一顆值得被細細品味的甜點。</div>
             </div>

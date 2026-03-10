@@ -103,7 +103,7 @@ function Home() {
 
             </div>
             <div className="cta">
-                <div className="main-title">Experience Divine</div>
+                <div className="cta-title">Experience Divine</div>
                 <Link to="/menu" className='home-btn'>View Menu</Link>
             </div>
         </div>

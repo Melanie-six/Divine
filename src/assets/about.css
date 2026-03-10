@@ -31,7 +31,7 @@
     background-position: center;
     border: 1px solid var(--champagne-gold);
 }
-.main-title {
+.about-title {
     font-family: var(--font-title);
     font-size: 8rem;
     color: var(--color-text-title);
