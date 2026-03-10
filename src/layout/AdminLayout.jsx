@@ -1,5 +1,5 @@
 import Footer from "../components/Footer";
-import { Link, Outlet, useNavigate } from "react-router";
+import { NavLink, Outlet, useNavigate } from "react-router";
 import "../assets/all.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import useMessage from "../hooks/useMessage";
@@ -31,15 +31,15 @@ function AdminLayout() {
         <nav className="navbar navbar-expand-lg theme-dark ">
             <div className="container theme-dark ">
                 <div className="m-2">
-                    <Link className="navbar-brand theme-dark " to="/admin/products">Divine</Link>
+                    <div className="navbar-brand theme-dark " to="/admin/products">Divine</div>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                     </button>
                 </div>
                 <div className="collapse navbar-collapse d-lg-flex justify-content-between" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        <Link className="nav-link theme-dark " aria-current="page" to="/admin/products">Product Management</Link>
-                        <Link className="nav-link theme-dark " to="/admin/orders">Orders</Link>
+                        <NavLink className="nav-link theme-dark " aria-current="page" to="/admin/products">Product Management</NavLink>
+                        <NavLink className="nav-link theme-dark " to="/admin/orders">Orders</NavLink>
                     </div>
                     <div className="navbar-nav">
                         {/* <button type="button" className="nav-link btn btn-link text-danger" 

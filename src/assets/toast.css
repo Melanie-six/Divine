@@ -1,0 +1,65 @@
+:root {
+  /* 核心色彩 (Core Colors) */
+  --midnight-blue: #1B263B;    /* 主色 / 深色背景 */
+  --champagne-gold: #D4AF37;   /* 強調色 / 標題色 */
+  --cream-white: #F5F5F0;      /* 背景色 / 淺色模式文字 */
+
+  /* 語義化命名 - 前台預設 (Dark Theme) */
+  --color-primary: var(--midnight-blue);
+  --color-accent: var(--champagne-gold);
+  --color-bg: var(--midnight-blue);
+  --color-text-main: var(--cream-white);
+  --color-text-title: var(--champagne-gold);
+
+  /* 字體設定 (Typography) */
+  --font-serif: 'Playfair Display';
+  --font-mono: 'Fira Code', monospace;
+  --font-title: "Songti TC", "Source Han Serif TC";
+  --font-body: "PingFang TC", "Source Han Sans TC", "Microsoft JhengHei", sans-serif;
+}
+
+.custom-toast {
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+    min-width: 300px;
+    padding: 16px 20px;
+    border-radius: 8px;
+    border: 1px solid; 
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+.toast-tag, .toast-tag-bottom {
+    position: absolute;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    opacity: 0.7;
+}
+.toast-tag {
+    top: 5px;
+    right: 15px;
+}
+.toast-tag-bottom {
+    bottom: 5px;
+    right: 15px;
+}
+.border-success { border-color: var(--champagne-gold) !important; } /* 圖片中的金色邊框 */
+.tag-success { color: var(--champagne-gold); }
+.border-danger { border-color: #e57373 !important; } /* 圖片中的粉紅邊框 */
+.tag-danger { color: #e57373; }
+.toast-icon-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+.bg-success { background-color: var(--champagne-gold) !important; color: var(--color-primary) !important; }
+.bg-danger { background-color: #e57373 !important; color: #fff !important; }
+.toast-content {
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}

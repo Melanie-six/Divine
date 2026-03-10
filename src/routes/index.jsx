@@ -11,6 +11,7 @@ import AdminLayout from "../layout/AdminLayout";
 import SingleProduct from "../views/frontend/SingleProduct";
 import OrderForm from "../views/frontend/OrderForm";
 import ProtectedRoute from "../components/ProtectedRoute";
+import Payment from "../views/frontend/Payment";
 
 
 
@@ -44,6 +45,10 @@ const routes = [
             {
                 path: "order",
                 element: <OrderForm />,
+            },
+            {
+                path: "pay",
+                element: <Payment />,
             },
             {
                 path: "login",

@@ -12,16 +12,19 @@
   --color-text-title: var(--champagne-gold);
 
   /* 字體設定 (Typography) */
-  --font-serif: 'Playfair Display'; /* 優雅標題 */
-  --font-mono: 'Fira Code', monospace;     /* 邏輯/代碼 */
+  --font-serif: 'Playfair Display';
+  --font-mono: 'Fira Code', monospace;
   --font-title: "Songti TC", "Source Han Serif TC";
   --font-body: "PingFang TC", "Source Han Sans TC", "Microsoft JhengHei", sans-serif;
 }
 body {
     background-color: var(--color-bg);
     color: var(--color-text-main);
+    padding-top: 70px;
 }
-
+.login {
+    margin: 2rem auto;
+}
 .theme-dark {
     background-color: var(--color-bg);
     color: var(--color-text-main);
@@ -65,8 +68,13 @@ body {
 .active {
     color: var(--color-accent);
 }
-.nav-link:hover, .nav-link:active {
+.nav-link:hover {
     color: var(--color-accent);
+}
+.navbar-nav .nav-link.active {
+    color: var(--color-accent) !important; /* 強制使用你的金色 */
+    font-weight: bold;
+    border-bottom: 1px solid var(--color-accent); /* 可選：加底線更有感覺 */
 }
 .navbar-brand:hover {
     color: var(--color-accent);
@@ -173,13 +181,13 @@ body {
     margin-right: 12px;
 }
 
-.cart-table {
+.cart-table, .payment-table {
     background-color: var(--midnight-blue);
     border: 2px solid var(--color-accent);
     border-radius: 5px;
     overflow: hidden; 
     font-family: var(--font-mono);
-    margin: 0 auto;
+    margin: 2rem auto;
     width: 100%;
 }
 .table-header {
@@ -291,6 +299,15 @@ footer {
         color: var(--color-bg);
         border: 2px solid var(--color-accent);
     }
+}
+.cart-badge {
+    background-color: var(--color-bg);
+    color: var(---color-text-main); 
+    font-size: 1rem;
+    padding: 3px 6px;
+    font-family: var(--font-mono);
+    font-weight: bold;
+    margin-left: 5px;
 }
     @media (max-width: 768px) {
         .sidebar .nav {

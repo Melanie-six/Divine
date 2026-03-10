@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import '../../assets/all.css';
+import useMessage from "../../hooks/useMessage";
 
 
 
@@ -10,6 +11,7 @@ const {VITE_API_BASE, VITE_API_PATH} = import.meta.env;
 function SingleProduct() {
     const [product, setProduct] = useState({});
     const [qty, setQty] = useState(1);
+    const { showError, showSuccess } = useMessage();
 
     const params = useParams();
     const { id } = params;
@@ -34,9 +36,11 @@ function SingleProduct() {
                 qty
             }
             const res = await axios.post(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`, {data});
-            alert("已加入購物車");
+            showSuccess("已加入購物車");
+            window.dispatchEvent(new Event("cart-updated"));
         } catch (error) {
             console.log(error.response);
+            showError("加入購物車失敗");
         }
     };
 

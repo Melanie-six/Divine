@@ -73,7 +73,7 @@ function Login() {
             {errors.password && (<p className="text-danger">{errors.password.message}</p>)}
 
           </div>
-          <button type='submit' className='btn btn-primary w-100 mt-2'>登入</button>
+          <button type='submit' className='btn btn-add-to-cart mt-3'>登入</button>
         </form></div>
     )
 };

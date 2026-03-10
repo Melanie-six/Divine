@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import '../../assets/all.css';
 import { Link } from "react-router";
+import useMessage from "../../hooks/useMessage";
 
 
 const {VITE_API_BASE, VITE_API_PATH} = import.meta.env;
@@ -12,12 +13,12 @@ const {VITE_API_BASE, VITE_API_PATH} = import.meta.env;
 function Cart() {
 
     const [cart, setCart] = useState([]);
+    const { showError, showSuccess } = useMessage();
 
     const getCart = async () => {
         try {
             const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
             setCart(res.data.data);
-            console.log(res.data.data);
         } catch (error) {
             console.log(error.response);
         }
@@ -37,8 +38,10 @@ function Cart() {
             const res = await axios.put(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart/${cartId}`, {data});
             const res2 = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
             setCart(res2.data.data);
+            showSuccess("已更新商品數量");
         } catch (error) {
             console.log(error.response)
+            showError("更新商品數量失敗");
         };
     };
 
@@ -47,8 +50,10 @@ function Cart() {
             const res = await axios.delete(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart/${cartId}`);
             const res2 = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
             setCart(res2.data.data);
+            showSuccess("已刪除商品");
         } catch (error) {
             console.log(error.response)
+            showError("刪除商品失敗");
         }
     };
 

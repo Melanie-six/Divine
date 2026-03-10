@@ -3,6 +3,7 @@ import '../../assets/all.css';
 import axios from 'axios';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Link } from "react-router";
+import useMessage from '../../hooks/useMessage';
 
 const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
@@ -11,6 +12,7 @@ function Products() {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('all');
+    const { showError, showSuccess } = useMessage();
 
     useEffect(() => {
         const getAllProducts = async () => {
@@ -51,10 +53,11 @@ function Products() {
                 qty
             }
             const res = await axios.post(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`, {data});
-            alert("已加入購物車");
-
+            showSuccess("已加入購物車");
+            window.dispatchEvent(new Event("cart-updated"));
         } catch (error) {
             console.log(error.response);
+            showError("加入購物車失敗");
         }
     }
 
@@ -72,7 +75,7 @@ function Products() {
                                     e.preventDefault();
                                     setSelectedCategory(category);
                                 }} 
-                                href="#">{category}</a>
+                                href="#">{category === 'all' ? '所有產品' : category}</a>
                             </li>
                         )
                     })}

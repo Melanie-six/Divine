@@ -91,10 +91,13 @@ function OrderModal ({modalType, templateData, isModalOpen, setIsModalOpen, getO
 
         try {
             const res = await axios[method](url, orderData);
-            console.log(res.data);
+            // console.log(res.data);
+            if (document.activeElement instanceof HTMLElement) {
+                document.activeElement.blur();
+            }
             modalInstance.current.hide();
-            handleCloseModal();
-            dispatch(createAsyncMessage(res.data))
+            // handleCloseModal();
+            // dispatch(createAsyncMessage(res.data))
             getOrders(currentPage);
             showSuccess('訂單更新成功');
         } catch (error) {
@@ -105,7 +108,7 @@ function OrderModal ({modalType, templateData, isModalOpen, setIsModalOpen, getO
     const delOrder = async (id) => {
         try {
             const res = await axios.delete(`${VITE_API_BASE}/api/${VITE_API_PATH}/admin/order/${id}`);
-            console.log(res.data);
+            // console.log(res.data);
             getOrders(currentPage);
             handleCloseModal();
             showSuccess('訂單刪除成功');

@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import '../../assets/all.css'
+import useMessage from "../../hooks/useMessage";
 
 const {VITE_API_BASE, VITE_API_PATH} = import.meta.env;
 
 
 function OrderForm() {
+    const { showError, showSuccess } = useMessage();
 
     const {
         register,
@@ -21,7 +24,6 @@ function OrderForm() {
         try {
             const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
             setCart(res.data.data);
-            console.log(res.data.data);
         } catch (error) {
             console.log(error.response);
         }
@@ -41,12 +43,12 @@ function OrderForm() {
             const res = await axios.post(`${VITE_API_BASE}/api/${VITE_API_PATH}/order`, {
                 data,
             });
-            console.log(res.data);
             const res2 = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
-            console.log(res2.data.data);
             setCart(res2.data.data);
+            showSuccess("訂單已成功提交");
         } catch (error) {
             console.log(error.response)
+            showError("提交訂單失敗");
         };
     };
 
@@ -187,7 +189,7 @@ function OrderForm() {
                         // defaultValue="若有任何額外需求，請在此輸入"
                         {...register("message")} />
                 </div>
-                <button type="submit" className="btn btn-primary">送出訂單</button>
+                <button type="submit" className="btn btn-add-to-cart">送出訂單</button>
             </form>
         </div>
     </>)
