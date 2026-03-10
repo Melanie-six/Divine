@@ -189,7 +189,7 @@ function About() {
                     <img className="handmade-img-lg" src="https://plus.unsplash.com/premium_photo-1764355177633-7a0755aab91c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YmFraW5nJTIwZWNsYWlyc3xlbnwwfHwwfHx8MA%3D%3D" alt="泡芙" />
                 </div>
                 <div className="handmade-content">
-                    <div className="story-title">Handcrafted, <br />Not Mass Produced</div>
+                    <div className="story-title handmade-title">Handcrafted, <br />Not Mass Produced</div>
                     <div className="role-content">
                         <p>在 Divine，我們堅持一件事情：<br /><br />
                             <span className="text-big">所有甜點皆為手工製作。</span><br /><br />

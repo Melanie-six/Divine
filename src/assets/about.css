@@ -353,3 +353,140 @@
     margin-bottom: 1rem;
     text-align: center;
 }
+
+@media (max-width: 768px) {
+    .content {
+        margin-top: 2rem;
+    }
+    .story-img1 {
+        z-index: 3;
+        transform: translateX(0px);
+    }
+    .story-img2 {
+        z-index: 2;
+        margin-top: -50px;
+        transform: translateX(-30px);
+    }
+    .story-img3 {
+        z-index: 1;
+        margin-top: -50px;
+        transform: translateX(-10px);
+    }
+    .role-content {
+        margin: 0 2.5rem;
+    }
+    .handmade-img-lg {
+        transform: translateX(-10px);
+    }
+    .handmade-img-sm {
+        transform: translateX(10px);
+    }
+    .handmade-title {
+        margin-left: 1.6rem;
+    }
+}
+@media (max-width: 425px) {
+    .about-title {
+        font-size: 6rem;
+    }
+    .story {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    .story-left {
+        width: 100%;
+    }
+    .story-title {
+        font-size: 1.8rem;
+    }
+    .story-content {
+        line-height: 1.2;
+    }
+    .story-right {
+        padding: 0;
+    }
+    .story-right img {
+        border: 1px solid var(--color-accent);
+    }
+    .story-img1 {
+        transform: translateX(0px);
+    }
+    .story-img2 {
+        margin-top: 0px;
+        transform: translateX(0px);
+    }
+    .story-img3 {
+        margin-top: 0px;
+        transform: translateX(0px);
+    }
+    .role {
+        padding: 1rem;
+    }
+    .role-title {
+        font-size: 1.8rem;
+    }
+    .role-content {
+        line-height: 1.2;
+        width: 100%;
+        max-width: auto;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    .art {
+        padding: 1rem;
+    }
+    .section {
+        width: 100%;
+        flex-direction: column;
+        margin: 0 auto;
+    }
+    .img-box {
+        width: 100%;
+    }
+    .section-img {
+        width: 100%;
+    }
+    .section-anti {
+        width: 100%;
+        margin: 0 auto;        
+        flex-direction: column;
+    }
+    .art-content {
+        width: 108%;
+        padding: 1rem;
+    }
+    .product-slogan {
+        margin-bottom: 0.5rem;
+    }
+    .handmade {
+        padding: 1rem;
+        flex-direction: column;
+    }
+    .handmade-img-box {
+        width: 100%;
+        padding: 10px;
+    }
+    .handmade-img-lg {
+        width: 250px; 
+        height: 300px;
+        transform: translateX(-5px);
+    }
+    .handmade-img-sm {
+        width: 250px; 
+        height: 200px;
+        transform: translateX(25px);
+    }
+    .handmade-title {
+        margin: 0 auto;
+        font-size: 2rem;
+    }
+    .handmade-content {
+        width: 100%;
+    }
+    .welcome {
+        padding: 1rem;
+    }
+    .welcome-title {
+        font-size: 2.5rem;
+    }
+}
