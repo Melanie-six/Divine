@@ -61,12 +61,12 @@ function Products() {
     return (<>
     <div className="container theme-dark p-1">
         <div className="row">
-            <div className="sidebar col-lg-3">
-                <ul className="nav flex-column">
+            <div className="sidebar col-lg-3 mb-4">
+                <ul className="nav d-flex flex-row flex-lg-column justify-content-start overflow-x-auto flex-nowrap">
                     {categories.map(category => {
                         return (
                             <li className="nav-item" key={category}>
-                                <a className={`text-description
+                                <a className={`text-description category-link
                                 ${selectedCategory === category ? 'active' : ''}`}
                                 onClick={(e) => {
                                     e.preventDefault();
@@ -79,21 +79,23 @@ function Products() {
                 </ul>
             </div>
             <div className="main col-lg-9">
-                <div className="row row-cols-1 row-cols-md-3 g-3">
+                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
                     {products?.map((product) => {
                         return (
-                            <div className="productcard col-3" key={product.id}>
-                                <div className="card-body">
-                                <img src={product.imageUrl} alt={product.title} />
-                                <p className="productcard-primary h4">{product.title}</p>
-                                <p className="productcard-price">$ {product.price}</p>
-                                </div>
-                                <div className="card-footer ">
-                                <Link to={`/product/${product.id}`}><i className="bi bi-search"></i></Link>
-                                <button type="btn" onClick={() => addCart(product.id)}>
-                                    <i className="bi bi-cart3"></i>
-                                </button>
-                                
+                            <div className="col" key={product.id}>
+                                <div className="productcard">
+                                    <div className="card-body">
+                                        <img src={product.imageUrl} alt={product.title} />
+                                        <p className="productcard-primary h4">{product.title}</p>
+                                        <p className="productcard-price">$ {product.price}</p>
+                                    </div>
+                                    <div className="card-footer">
+                                        <Link className="btn btn-view" to={`/product/${product.id}`}>Details</Link>
+                                    <button type="btn" className="btn btn-cart" onClick={() => addCart(product.id)}>
+                                        <i className="bi bi-cart3"></i>
+                                    </button>
+                                    
+                                    </div>
                                 </div>
                             </div>      
                         )

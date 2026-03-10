@@ -53,6 +53,9 @@ body {
     border: 1px solid var(--color-accent);
     border-radius: 8px;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 .productcard img {
     width: 100%;
@@ -69,6 +72,7 @@ body {
     color: var(--color-accent);
 }
 .main-image {
+    width: 100%;
     border: 1px solid var(--color-accent);
     padding: 2px;
     object-fit: cover;
@@ -77,7 +81,14 @@ body {
     border: 1px solid var(--color-accent);
     padding: 15px;
 }
+.image-container {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .content-container {
+    width: 50%;
     border: 1px solid var(--color-accent);
     padding: 20px;
 }
@@ -105,93 +116,77 @@ body {
 }
 
 .num-control {
-  display: flex;
-  align-items: center;
-  margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
 }
 
-/* 容器佈局 */
 .qty-control {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-/* 增減按鈕基礎樣式 */
 .btn-qty {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  /* 顏色與邊框 */
-  background-color: var(--color-text-main);     /* 米白色背景 */
-  border: 1px solid var(--color-accent);  /* 香檳金邊框 */
-  color: var(--color-accent);             /* 符號顏色 */
-  
-  /* 圓角與陰影：營造立體感 */
-  border-radius: 6px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 微弱陰影 */
-  
-  /* 字體設定 */
-  font-family: var(--font-mono);      /* 使用你選定的邏輯字體 */
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-text-main); 
+    border: 1px solid var(--color-accent); 
+    color: var(--color-accent);  
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: var(--font-mono); 
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
-
-/* 滑鼠觸碰效果 */
 .btn-qty:hover {
-  background-color: #fff;                   /* 變亮一點點 */
-  transform: translateY(-1px);              /* 輕微浮起 */
-  box-shadow: 0 4px 6px rgba(212, 175, 55, 0.2);
+    background-color: #fff; 
+    transform: translateY(-1px); 
+    box-shadow: 0 4px 6px rgba(212, 175, 55, 0.2);
 }
-
-/* 點擊效果 */
 .btn-qty:active {
-  transform: translateY(0);
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* 內凹感 */
+    transform: translateY(0);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-
 .btn-qty:disabled {
-    opacity: 0.3;                    /* 降低透明度 */
-    cursor: not-allowed;             /* 滑鼠變更為禁止符號 */
-    filter: grayscale(1);            /* 移除金色感，變灰阶 */
-    border-style: dashed;            /* 甚至可以把實線邊框變虛線 */
+    opacity: 0.3; 
+    cursor: not-allowed; 
+    filter: grayscale(1); 
+    border-style: dashed; 
 }
-
-/* 中間數字樣式 */
 .qty-number {
-  font-family: var(--font-mono);      /* 邏輯字體 */
-  font-size: 1.1rem;
-  min-width: 20px;
-  text-align: center;
+    font-family: var(--font-mono); 
+    font-size: 1.1rem;
+    min-width: 20px;
+    text-align: center;
 }
 .qty-label {
-  font-family: var(--font-mono);      /* 邏輯字體 */
-  font-size: 1.1rem;
-  min-width: 20px;
-  text-align: center;
-  transform: translateY(0.5px);
-  margin-right: 12px;
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    min-width: 20px;
+    text-align: center;
+    transform: translateY(0.5px);
+    margin-right: 12px;
 }
 
-/* cart*/
 .cart-table {
     background-color: var(--midnight-blue);
     border: 2px solid var(--color-accent);
     border-radius: 5px;
-    overflow: hidden; /* 確保內容不會超出圓角 */
+    overflow: hidden; 
     font-family: var(--font-mono);
     margin: 0 auto;
     width: 100%;
 }
 .table-header {
-  background-color: var(--color-accent);
-  color: var(--midnight-blue);
-  font-size: 1.2rem;
-  font-family: var(--font-mono);
+    background-color: var(--color-accent);
+    color: var(--midnight-blue);
+    font-size: 1.2rem;
+    font-family: var(--font-mono);
 }
 .cart-img {
     width: 100px;
@@ -200,14 +195,14 @@ body {
     border-radius: 3px;
 }
 .table-body {
-  align-items: center;
-  padding: 15px 20px;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.5); /* 半透明金色分隔線 */
-  color: var(--cream-white);
-  transition: background-color 0.3s;
-  &:hover {
-  background-color: rgba(255, 255, 255, 0.05); /* 滑過時微亮 */
-    }
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+    color: var(--cream-white);
+    transition: background-color 0.3s;
+    &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+        }
 }
 .btn-del-qty {
     color: var(--color-accent);  
@@ -246,3 +241,90 @@ footer {
     border-top: 0.5px solid var(--color-accent);
     border-bottom: 0.5px solid var(--color-accent);
 }
+.category-link {
+    display: block;
+    text-decoration: none;
+    color: var(--color-text-main);
+    font-size: 1.1rem;
+    padding: 10px;
+    &:hover {
+        border: 1px solid var(--color-accent);
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    }
+    &:active {
+        background-color: var(--color-accent);
+        color: var(--color-primary);
+    }
+}
+.category-list {
+    display: flex;
+    flex-direction: column;
+}
+.card-body {
+    flex-grow: 1;
+}
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.btn-view {
+    width: 48%;
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+    border: 1px solid var(--color-accent);
+    &:hover {
+        background-color: var(--color-text-main);
+        color: var(--color-bg);
+        border: 1px solid var(--color-accent);
+    }
+}
+.btn-cart {
+    font-size: 1.2rem;
+    width: 48%;
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    border: 1px solid var(--color-accent);
+    &:hover {
+        background-color: var(--color-text-main);
+        color: var(--color-bg);
+        border: 2px solid var(--color-accent);
+    }
+}
+    @media (max-width: 768px) {
+        .sidebar .nav {
+            white-space: nowrap;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--color-accent);
+        }
+        .nav-item {
+            margin-right: 10px;
+        }
+        .category-link {
+            padding: 6px 15px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+        }
+    }
+    .overflow-x-auto::-webkit-scrollbar {
+        display: none;
+    }
+    .overflow-x-auto {
+        -ms-overflow-style: none;  
+        scrollbar-width: none;  
+    }
+    @media (max-width: 425px) {
+        .image-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .content-container {
+            width: 100%;
+            border: 1px solid var(--color-accent);
+            padding: 20px;
+        }
+
+    }

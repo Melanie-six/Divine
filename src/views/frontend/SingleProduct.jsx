@@ -41,20 +41,15 @@ function SingleProduct() {
     };
 
     return (<>
-    <div className="container-lg theme-dark row m-5">
-        <div className="col-lg-6">
-            <div className="card-body d-flex justify-content-center">
-            <p>alt\</p>
-            <div className="main-image-container">
-                <img className="main-image" src={product.imageUrl} alt={product.title} />
-            </div>
-            <p>/alt</p>
-            </div>
-            <div className="card-footer">
-                
+    <div className="container-lg theme-dark d-flex flex-md-row flex-column p-3">
+        <div className="col image-container">
+            <div className="card-body">
+                <div className="main-image-container">
+                    <img className="main-image" src={product.imageUrl} alt={product.title} />
+                </div>
             </div>
         </div>
-        <div className="col-lg-6 content-container">
+        <div className="col content-container">
             <h2 className="heading-primary">{product.title}</h2>
             <p className="text-description">{product.description}</p>
             <div>
