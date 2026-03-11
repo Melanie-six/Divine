@@ -60,7 +60,7 @@ function Cart() {
 
     return (<>
         <div className="container mb-3 d-flex justify-content-between">
-            <h2>購物車</h2>
+            <div className="cart-title">購物車</div>
             <div>
                 {/* <button className="btn btn-outline-danger me-3">清空購物車</button> */}
             </div>
@@ -99,7 +99,7 @@ function Cart() {
                                 </td>
                                 <td>NT$ {item.final_total}</td>
                                 <td>
-                                    <button className="btn btn-del-qty" 
+                                    <button className="btn-del-qty" 
                                         onClick={() => deleteQty(item.id)}>
                                         <i className="bi bi-trash3-fill">
                                         </i>
@@ -109,10 +109,10 @@ function Cart() {
                         )})}
                 </tbody>
                 <tfoot className="p-3">
-                    <tr className="h5 my-3">
-                        <th colSpan="4" className="text-end"><strong>結帳總金額：</strong></th>
+                    <tr className="my-3">
+                        <th colSpan="4" className="final-total">結帳總金額：</th>
                         <th className="text-danger">{cart.final_total}</th>
-                        <th><Link to="/order" className="btn btn-add-to-cart">結帳去</Link></th>
+                        <th><Link to="/order" className="btn-add-to-cart">結帳去</Link></th>
                     </tr>
                 </tfoot>
             </table>

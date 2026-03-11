@@ -41,9 +41,11 @@
 
 .banner-sub-title {
     font-family: var(--font-title);
+    color: var(--color-text-main);
     font-size: 1.5rem;
 }
 .banner-content {
+    color: var(--color-text-main);
     opacity: 0.8;
 }
 .home-btn {

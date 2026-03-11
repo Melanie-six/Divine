@@ -349,7 +349,7 @@
     text-align: center;
     color: var(--color-text-main);
 }
-.welcome-content.welcome-title {
+.welcome-title {
     font-family: var(--font-title);
     font-size: 3rem;
     color: var(--color-text-title);

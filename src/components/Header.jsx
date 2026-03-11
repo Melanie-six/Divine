@@ -43,7 +43,7 @@ function Header () {
                         <NavLink className="nav-link theme-dark " aria-current="page" to="/">Home</NavLink>
                         <NavLink className="nav-link theme-dark " to="about">About</NavLink>
                         <NavLink className="nav-link theme-dark " to="products">Menu</NavLink>
-                        {/* <NavLink className="nav-link theme-dark " to="order">Orders</NavLink> */}
+                        <NavLink className="nav-link theme-dark " to="cart">Cart</NavLink>
                         <NavLink className="nav-link theme-dark " to="pay">Payment</NavLink>
 
                     </div>
