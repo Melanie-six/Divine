@@ -37,7 +37,7 @@ function Payment() {
 
     return (<>
         <div className="container">
-            <h2>訂單管理</h2>
+            <div className="payment-title">訂單管理</div>
             <table className="payment-table">
                 <thead >
                     <tr className="table-header">
@@ -61,7 +61,7 @@ function Payment() {
                                 <span className={order.is_paid ? 'text-success' : 'text-danger'}>
                                 {order.is_paid ? "已付款" : "未付款"}</span></td>
                             <td>
-                                <button type='button' className='btn btn-add-to-cart' onClick={() => payOrder(order.id)}>付款去</button>
+                                <button type='button' className='btn-add-to-cart' onClick={() => payOrder(order.id)}>付款去</button>
                                 {/* <button type='button' className='btn btn-danger btn-sm' onClick={() => handleOpenModal("del", order)}>刪除訂單</button> */}
                                 </td>
                             </tr>

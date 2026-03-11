@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import '../../assets/all.css';
 import axios from 'axios';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Link } from "react-router";
 import useMessage from '../../hooks/useMessage';
+import '../../assets/all.css';
 
 const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
@@ -93,8 +93,8 @@ function Products() {
                                         <p className="productcard-price">$ {product.price}</p>
                                     </div>
                                     <div className="card-footer">
-                                        <Link className="btn btn-view" to={`/product/${product.id}`}>Details</Link>
-                                    <button type="btn" className="btn btn-cart" onClick={() => addCart(product.id)}>
+                                        <Link className="btn-view" to={`/product/${product.id}`}>Details</Link>
+                                    <button type="btn" className="btn-cart" onClick={() => addCart(product.id)}>
                                         <i className="bi bi-cart3"></i>
                                     </button>
                                     

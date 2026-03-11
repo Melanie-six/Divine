@@ -1,9 +1,9 @@
 import { NavLink } from "react-router";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import "../assets/all.css"
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "../assets/all.css"
 
 const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 

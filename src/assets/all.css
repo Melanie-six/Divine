@@ -18,7 +18,7 @@
   --font-body: "PingFang TC", "Source Han Sans TC", "Microsoft JhengHei", sans-serif;
 }
 body {
-    background-color: var(--color-bg);
+    background-color: var(--color-bg) !important;
     color: var(--color-text-main);
     padding-top: 70px;
 }
@@ -68,6 +68,9 @@ body {
 .active {
     color: var(--color-accent);
 }
+.nav-link {
+    color: var(--color-text-main);
+}
 .nav-link:hover {
     color: var(--color-accent);
 }
@@ -75,6 +78,9 @@ body {
     color: var(--color-accent) !important; /* 強制使用你的金色 */
     font-weight: bold;
     border-bottom: 1px solid var(--color-accent); /* 可選：加底線更有感覺 */
+}
+.navbar-brand {
+    color: var(--color-text-main);
 }
 .navbar-brand:hover {
     color: var(--color-accent);
@@ -308,6 +314,22 @@ footer {
     font-family: var(--font-mono);
     font-weight: bold;
     margin-left: 5px;
+}
+.adminProduct-title, .adminOrder-title, .payment-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: var(--color-text-main);
+}
+.login-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-main);
+}
+.login-form-label {
+    color: var(--color-text-main);
+    margin-bottom: 0.5rem;
 }
     @media (max-width: 768px) {
         .sidebar .nav {

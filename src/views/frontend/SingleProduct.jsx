@@ -1,9 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import '../../assets/all.css';
 import useMessage from "../../hooks/useMessage";
-
+import '../../assets/all.css';
 
 
 const {VITE_API_BASE, VITE_API_PATH} = import.meta.env;

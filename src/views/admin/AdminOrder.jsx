@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useMessage from "../../hooks/useMessage";
 import Pagination from "../../components/Pagination";
 import OrderModal from "../../components/OrderModal";
+import '../../assets/all.css'
 
 const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
@@ -63,7 +64,7 @@ function AdminOrder() {
         <>
         <div className="container">
             <div className="col-md-12 my-3">
-            <h2>訂單管理</h2>
+            <div className="adminOrder-title">訂單管理</div>
             <div className='d-flex flex-row-reverse me-5 my-3'>
                 <button type='button' className='btn btn-danger'
                 >刪除所有訂單</button>

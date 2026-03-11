@@ -5,8 +5,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import axios from 'axios';
 import { use, useEffect, useState } from 'react';
-import '../../assets/home.css'
 import { NavLink } from 'react-router';
+import '../../assets/home.css'
 
 const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
@@ -31,9 +31,9 @@ function Home() {
         <div className="container">
             <div className="banner mb-3">
                 <div className="main-title">Divine</div>
-                <div className="subtitle">Handcrafted French Pâtisserie</div>
-                <p>在精準與感性之間，
-                    誕生每一顆值得被細細品味的甜點。</p>
+                <div className="banner-sub-title">Handcrafted French Pâtisserie</div>
+                <div className="banner-content">在精準與感性之間，
+                    誕生每一顆值得被細細品味的甜點。</div>
                 <NavLink to="/products" type="button" className='home-btn'>Explore the Collection</NavLink>
             </div>
             <div className="philosophy mb-3 d-flex">

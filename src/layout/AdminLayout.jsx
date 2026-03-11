@@ -1,9 +1,9 @@
 import Footer from "../components/Footer";
 import { NavLink, Outlet, useNavigate } from "react-router";
-import "../assets/all.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import useMessage from "../hooks/useMessage";
 import axios from "axios";
+import "../assets/all.css";
 
 const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 

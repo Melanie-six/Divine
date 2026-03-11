@@ -39,11 +39,11 @@
     font-size: 5rem;
 }
 
-.subtitle {
+.banner-sub-title {
     font-family: var(--font-title);
     font-size: 1.5rem;
 }
-p {
+.banner-content {
     opacity: 0.8;
 }
 .home-btn {

@@ -1,5 +1,6 @@
 import { RotatingSquare } from "react-loader-spinner";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../assets/all.css'
 
 
 

@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import '../../assets/all.css';
 import { Link } from "react-router";
 import useMessage from "../../hooks/useMessage";
+import '../../assets/all.css';
 
 
 const {VITE_API_BASE, VITE_API_PATH} = import.meta.env;

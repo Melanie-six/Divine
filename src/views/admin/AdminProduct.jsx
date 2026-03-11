@@ -4,6 +4,7 @@ import Pagination from "../../components/Pagination";
 import Modal from "../../components/Modal";
 import { useDispatch } from "react-redux";
 import useMessage from "../../hooks/useMessage";
+import '../../assets/all.css'
 
 const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
@@ -66,7 +67,7 @@ function AdminProduct() {
         <>
         <div className="container">
             <div className="col-md-12 my-3">
-            <h2>產品管理</h2>
+            <div className="adminProduct-title">產品管理</div>
             <div className='d-flex flex-row-reverse me-5'>
                 <button type='button' className='btn btn-success'
                 onClick={() => handleOpenModal("create", Initial_Template_Data)}>新增產品</button>
