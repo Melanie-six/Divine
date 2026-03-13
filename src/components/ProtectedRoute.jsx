@@ -5,7 +5,6 @@ import { Navigate } from "react-router";
 import LoadingPage from "./LoadingPage";
 
 const API_BASE = import.meta.env.VITE_API_BASE;
-const API_PATH = import.meta.env.VITE_API_PATH;
 
 
 function ProtectedRoute({ children }) {
@@ -22,7 +21,7 @@ function ProtectedRoute({ children }) {
 
     const checkLogin = async () => {
         try {
-        const res = await axios.post(`${API_BASE}/api/user/check`);
+        await axios.post(`${API_BASE}/api/user/check`);
         setIsAuth(true);
         } catch(error) {
             setIsAuth(false);

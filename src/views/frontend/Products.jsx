@@ -52,7 +52,7 @@ function Products() {
                 product_id: id,
                 qty
             }
-            const res = await axios.post(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`, {data});
+            await axios.post(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`, {data});
             showSuccess("已加入購物車");
             window.dispatchEvent(new Event("cart-updated"));
         } catch (error) {

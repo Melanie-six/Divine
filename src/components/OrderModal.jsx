@@ -1,8 +1,6 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
 import * as bootstrap from "bootstrap";
-import { current } from "@reduxjs/toolkit";
 import useMessage from "../hooks/useMessage";
 const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
@@ -11,17 +9,10 @@ const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
 function OrderModal ({modalType, templateData, isModalOpen, setIsModalOpen, getOrders, currentPage}) {
     const [modalData, setModalData] = useState(templateData);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const modalRef = useRef(null);
     const modalInstance = useRef(null);
     const { showError, showSuccess } = useMessage();
-
-
-    useEffect(() => {
-        setModalData({
-            ...templateData,
-        })
-    }, [templateData]);
 
     useEffect(() => {
         modalInstance.current = new bootstrap.Modal(modalRef.current, {
@@ -90,7 +81,7 @@ function OrderModal ({modalType, templateData, isModalOpen, setIsModalOpen, getO
         };
 
         try {
-            const res = await axios[method](url, orderData);
+            await axios[method](url, orderData);
             // console.log(res.data);
             if (document.activeElement instanceof HTMLElement) {
                 document.activeElement.blur();
@@ -107,7 +98,7 @@ function OrderModal ({modalType, templateData, isModalOpen, setIsModalOpen, getO
     };
     const delOrder = async (id) => {
         try {
-            const res = await axios.delete(`${VITE_API_BASE}/api/${VITE_API_PATH}/admin/order/${id}`);
+            await axios.delete(`${VITE_API_BASE}/api/${VITE_API_PATH}/admin/order/${id}`);
             // console.log(res.data);
             getOrders(currentPage);
             handleCloseModal();

@@ -71,7 +71,7 @@ body {
 .navbar .nav-link {
     color: var(--color-text-main);
 }
-.nav-link:hover {
+.navbar .nav-link:hover {
     color: var(--color-accent);
 }
 .navbar-nav .nav-link.active {
@@ -81,8 +81,14 @@ body {
 }
 .navbar .navbar-brand {
     color: var(--color-text-main);
+    &:hover {
+    color: var(--color-accent);
+    }
+    &:active {
+    color: var(--color-accent);
+    }
 }
-.navbar-brand:hover {
+.navbar .navbar-brand:hover {
     color: var(--color-accent);
 }
 .main-image {

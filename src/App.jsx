@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { createHashRouter, RouterProvider } from 'react-router'
 import routes from "./routes/index.jsx"
 import store from './store/store.js';

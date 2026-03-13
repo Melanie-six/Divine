@@ -21,7 +21,6 @@ const Initial_Template_Data = {
   },
 }
 
-
 function AdminOrder() {
     const [orders, setOrders] = useState([]);
     const [pageInfo, setPageInfo] = useState({});
@@ -30,10 +29,6 @@ function AdminOrder() {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const { showError, showSuccess } = useMessage();
-
-    const handlePageChange = (page) => {
-        getOrders(page);
-    };
 
     const handleOpenModal = (type, product) => {
         setModalType(type);
@@ -45,8 +40,20 @@ function AdminOrder() {
     };
 
     useEffect(() => {
-        getOrders();
-    },[]);
+        const getOrdersInit = async (page = 1) => {
+        try {
+        const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/admin/orders?page=${page}`);
+        setOrders(res.data.orders);
+        // console.log(res.data.orders);
+        showSuccess("訂單列表載入成功");
+        setPageInfo(res.data.pagination);
+        } catch (error) {
+            console.log(error.response);
+            showError(error.response.data.message)
+        }
+    };
+        getOrdersInit();
+    },[showSuccess, showError]);
 
     const getOrders = async (page = 1) => {
         try {
@@ -60,6 +67,11 @@ function AdminOrder() {
             showError(error.response.data.message)
         }
     };
+
+    const handlePageChange = (page) => {
+        getOrders(page);
+    };
+
     return (
         <>
         <div className="container">

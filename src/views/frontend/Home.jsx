@@ -4,28 +4,28 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import axios from 'axios';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router';
 import '../../assets/home.css'
 
 const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
-
 function Home() {
     const [products, setProducts] = useState([]);
-    const getProducts = async () => {
-        try {
-            const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/products/all`);
-            setProducts(res.data.products);
-        } catch (error) {
-            console.error("Error fetching products:", error);
-        }
-    };
+    
     useEffect(() => {
+        const getProducts = async () => {
+            try {
+                const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/products/all`);
+                setProducts(res.data.products);
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            }
+        };
         getProducts();
     },[]);
-    const chouxProducts = products.filter(item => item.category === '泡芙');
 
+    const chouxProducts = products.filter(item => item.category === '泡芙');
 
     return (
         <div className="container">
@@ -39,7 +39,7 @@ function Home() {
             <div className="philosophy mb-3 d-flex">
                 <div className="philosophy-left">
                     <div className="philosophy-title">A Modern Interpretation of French Pâtisserie</div>
-                    <div className='content'>Divine 專注於法式泡芙甜點的創作，
+                    <div className='philosophy-content'>Divine 專注於法式泡芙甜點的創作，
                         以精準工藝與細膩風味，呈現經典法式甜點的現代詮釋。
                         從麵糊比例到奶油質地，
                         每一道細節都經過耐心調整與反覆測試。</div>
@@ -74,7 +74,7 @@ function Home() {
                                 <img className="card-img" src={product.imageUrl} alt={product.title} />
                                 <div className="card-content">
                                     <div className="card-title">{product.title}</div>
-                                    {/* <NavLink to={`/product/:${product.id}`} className="card-btn">View Details</NavLink> */}
+                                    {/* <NavLink to={`/product/${product.id}`} className="card-btn">View Details</NavLink> */}
                                 </div>
                             </div>
                         </SwiperSlide>

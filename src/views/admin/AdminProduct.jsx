@@ -1,8 +1,7 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Pagination from "../../components/Pagination";
 import Modal from "../../components/Modal";
-import { useDispatch } from "react-redux";
 import useMessage from "../../hooks/useMessage";
 import '../../assets/all.css'
 
@@ -30,13 +29,8 @@ function AdminProduct() {
     const [templateData, setTemplateData] = useState(Initial_Template_Data);
     const [modalType, setModalType] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const { showError, showSuccess } = useMessage();
-
-    const handlePageChange = (page) => {
-        getProducts(page);
-    };
 
     const handleOpenModal = (type, product) => {
         setModalType(type);
@@ -47,22 +41,38 @@ function AdminProduct() {
         setIsModalOpen(true);
     };
 
-    useEffect(() => {
-        getProducts();
-    },[]);
-
-    const getProducts = async (page = 1) => {
+    const getProducts = useCallback(async (page = 1) => {
         try {
-        const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/admin/products?page=${page}`);
-        setProducts(Object.values(res.data.products));
-        setPageInfo(res.data.pagination);
-        showSuccess("產品列表載入成功");
+            const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/admin/products?page=${page}`);
+            setProducts(Object.values(res.data.products));
+            setPageInfo(res.data.pagination);
+            showSuccess("產品列表載入成功");
         } catch (error) {
             console.log(error.response);
             // dispatch(createAsyncMessage(error.response.data));
             showError(error.response.data.message)
         }
+    }, [showSuccess, showError]);
+
+    useEffect(() => {
+        const getProductsOnInit = async () => {
+            try {
+                const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/admin/products?page=1`);
+                setProducts(Object.values(res.data.products));
+                setPageInfo(res.data.pagination);
+                showSuccess("產品列表載入成功");
+            } catch (error) {
+                console.error(error);
+                showError("產品列表載入失敗");
+            }
+        };
+        getProductsOnInit();
+    },[showSuccess, showError]);
+
+    const handlePageChange = (page) => {
+        getProducts(page);
     };
+
     return (
         <>
         <div className="container">

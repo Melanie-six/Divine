@@ -5,9 +5,7 @@ import useMessage from "../../hooks/useMessage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../assets/all.css'
 
-
-const {VITE_API_BASE, VITE_API_PATH} = import.meta.env;
-
+const {VITE_API_BASE} = import.meta.env;
 
 function Login() {
 
@@ -25,13 +23,16 @@ function Login() {
         password: '',
       }
     })
+    const api = axios.create({
+      baseURL: import.meta.env.VITE_API_BASE,
+    });
 
     const onSubmit = async (formData) => {
         try {
-            const response = await axios.post(`${VITE_API_BASE}/admin/signin`, formData);
+            const response = await api.post(`${VITE_API_BASE}/admin/signin`, formData);
             const {token, expired} = response.data;
-            document.cookie = `hexToken=${token};expires=${new Date(expired)}; path=/;`;
-            axios.defaults.headers.common['Authorization'] = token;
+            document.cookie = `hexToken=${token};expires=${new Date(expired).toUTCString()}; path=/;`;
+            api.defaults.headers.common["Authorization"] = token;
             navigate('/admin/products');
             showSuccess("登入成功");
         } catch(error) {

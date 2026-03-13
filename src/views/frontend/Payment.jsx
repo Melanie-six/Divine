@@ -15,22 +15,29 @@ function Payment() {
             const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/orders`);
             setOrderlist(res.data.orders);
         } catch (error) {
-            console.log(error.response);
+            console.error(error.response);
         }
     };
 
     useEffect(() => {
-        getOrderList();
+        const init = async () => {
+            try {
+                const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/orders`);
+                setOrderlist(res.data.orders);
+            } catch (e) { console.error(e); }
+        };
+        init();
     },[]);
 
     const payOrder = async (orderId) => {
         try {
-            const res = await axios.post(`${VITE_API_BASE}/api/${VITE_API_PATH}/pay/${orderId}`, {
+            await axios.post(`${VITE_API_BASE}/api/${VITE_API_PATH}/pay/${orderId}`, {
                 is_paid: true
             });
             showSuccess("付款成功");
             getOrderList();
         } catch (error) {
+            console.error(error.response);
             showError("付款失敗");
         }
     };

@@ -5,7 +5,7 @@ import useMessage from "../hooks/useMessage";
 import axios from "axios";
 import "../assets/all.css";
 
-const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
+const { VITE_API_BASE } = import.meta.env;
 
 
 function AdminLayout() {
@@ -16,14 +16,15 @@ function AdminLayout() {
     const handleLogout = async (e) => {
         e.preventDefault();
         try {
-        const response = await axios.post(`${VITE_API_BASE}/logout`);
-        } catch(error) {
-        showError("登出失敗");
+            await axios.post(`${VITE_API_BASE}/logout`);
+        } catch (error) {
+            console.error("登出失敗", error);
+            showError("登出失敗");
         } finally {
-        document.cookie = "hexToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        axios.defaults.headers.common['Authorization'] = '';
-        navigate("/login", { replace: true });
-        showSuccess("登出成功");
+            document.cookie = "hexToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            axios.defaults.headers.common['Authorization'] = '';
+            navigate("/login", { replace: true });
+            showSuccess("登出成功");
         }
     };
 

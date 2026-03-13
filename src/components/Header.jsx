@@ -8,26 +8,23 @@ import "../assets/all.css"
 const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
 function Header () {
-    const [cart, setCart] = useState([]);
-
-    const getCart = async () => {
-        try {
-            const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
-            setCart(res.data.data.carts.length);
-        } catch (error) {
-            console.log(error.response);
-        }
-    };
+    const [cartCount, setCartCount] = useState(0);
 
     useEffect(() => {
+        const getCart = async () => {
+            try {
+                const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
+                setCartCount(res.data.data.carts.length);
+            } catch (error) {
+                console.log(error.response);
+            }
+        };
         getCart();
-    },[]);
-    useEffect(() => {
-        getCart();
-        window.addEventListener("cart-updated", getCart); // 監聽通知
-        return () => window.removeEventListener("cart-updated", getCart); // 卸載時移除
+        window.addEventListener("cart-updated", getCart);
+        return () => {
+            window.removeEventListener("cart-updated", getCart);
+        };
     }, []);
-
 
     return (
         <nav className="navbar navbar-expand-lg theme-dark fixed-top">
@@ -50,8 +47,8 @@ function Header () {
                     <div className="navbar-nav">
                         <NavLink className="nav-link mx-2 theme-dark" to="cart">
                             <i className="bi bi-cart3"></i>
-                            {cart > 0 && (
-                                <span className="cart-badge">{cart}</span>
+                            {cartCount > 0 && (
+                                <span className="cart-badge">{cartCount}</span>
                             )}
                         </NavLink>
                         <NavLink className="nav-link mx-3 theme-dark" to="login"><i className="bi bi-person-circle"></i></NavLink>

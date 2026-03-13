@@ -12,31 +12,26 @@ function Modal ({modalType, templateData, isModalOpen, setIsModalOpen, getProduc
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        setModalData({
-            ...templateData,
-        })
-    }, [templateData]);
-
     const modalRef = useRef(null);
     const modalInstance = useRef(null);
 
     useEffect(() => {
-        modalInstance.current = new bootstrap.Modal(modalRef.current, {
+        const modalElement = modalRef.current;
+        modalInstance.current = new bootstrap.Modal(modalElement, {
             keyboard: false,
             backdrop: 'static'
         });
-        modalRef.current.addEventListener('hidden.bs.modal', () => {
+        modalElement.addEventListener('hidden.bs.modal', () => {
             setIsModalOpen(false);
         });
         return () => {
-            if (modalRef.current) {
-                modalRef.current.removeEventListener('hidden.bs.modal', () => {
+            if (modalElement) {
+                modalElement.removeEventListener('hidden.bs.modal', () => {
             setIsModalOpen(false);
         });
             }
         }
-    }, []);
+    }, [setIsModalOpen]);
 
     const handleModalChange = (e) => {
         const {name, value, checked, type} = e.target;

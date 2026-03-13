@@ -6,27 +6,31 @@ function About() {
     const containerRef = useRef(null);
 
     useEffect(() => {
+        const element = containerRef.current;
         const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
+            (entries) => {
+                entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+                });
+            },
+            { 
+                threshold: 0.1,
+                rootMargin: "0px 0px -40px 0px"
             }
-            });
-        },
-        { 
-            threshold: 0.1,
-            rootMargin: "0px 0px -40px 0px"
-        }
         );
 
-        if (containerRef.current) {
-        observer.observe(containerRef.current);
+        if (element) {
+            observer.observe(element);
         }
 
         return () => {
-        if (containerRef.current) observer.disconnect();
+            if (element) 
+            {
+                observer.disconnect();
+            }
         };
     }, []);
 

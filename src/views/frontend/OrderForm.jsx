@@ -20,7 +20,10 @@ function OrderForm() {
 
     const [cart, setCart] = useState([]);
 
-    const getCart = async () => {
+    
+
+    useEffect(() => {
+        const getCart = async () => {
         try {
             const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
             setCart(res.data.data);
@@ -28,8 +31,6 @@ function OrderForm() {
             console.log(error.response);
         }
     };
-
-    useEffect(() => {
         getCart();
     },[]);
 
@@ -40,7 +41,7 @@ function OrderForm() {
                 user: formData,
                 message: formData.message,
             };
-            const res = await axios.post(`${VITE_API_BASE}/api/${VITE_API_PATH}/order`, {
+            await axios.post(`${VITE_API_BASE}/api/${VITE_API_PATH}/order`, {
                 data,
             });
             const res2 = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);

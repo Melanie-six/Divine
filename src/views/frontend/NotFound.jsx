@@ -4,11 +4,13 @@ import { useEffect } from 'react';
 
 function NotFound() {
     const navigate = useNavigate();
+
     useEffect(() => {
         setTimeout(() => {
             navigate("/");
         }, 2000)
-    }, []);
+    }, [navigate]);
+
     return (
         <>
         <div className="notfound-container">

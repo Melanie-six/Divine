@@ -5,26 +5,22 @@ import { Link } from "react-router";
 import useMessage from "../../hooks/useMessage";
 import '../../assets/all.css';
 
-
 const {VITE_API_BASE, VITE_API_PATH} = import.meta.env;
-
-
 
 function Cart() {
 
     const [cart, setCart] = useState([]);
     const { showError, showSuccess } = useMessage();
 
-    const getCart = async () => {
-        try {
-            const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
-            setCart(res.data.data);
-        } catch (error) {
-            console.log(error.response);
-        }
-    };
-
     useEffect(() => {
+        const getCart = async () => {
+            try {
+                const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
+                setCart(res.data.data);
+            } catch (error) {
+                console.log(error.response);
+            }
+        };
         getCart();
     },[]);
 
@@ -35,7 +31,7 @@ function Cart() {
                 product_id: productId,
                 qty
             }
-            const res = await axios.put(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart/${cartId}`, {data});
+            await axios.put(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart/${cartId}`, {data});
             const res2 = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
             setCart(res2.data.data);
             showSuccess("已更新商品數量");
@@ -47,7 +43,7 @@ function Cart() {
 
     const deleteQty = async (cartId) => {
         try {
-            const res = await axios.delete(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart/${cartId}`);
+            await axios.delete(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart/${cartId}`);
             const res2 = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
             setCart(res2.data.data);
             showSuccess("已刪除商品");

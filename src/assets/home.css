@@ -97,6 +97,10 @@
 .content {
     font-family: var(--font-body);
 }
+.philosophy-content {
+    font-family: var(--font-body);
+    color: var(--midnight-blue);
+}
 .content-right {
     font-family: var(--font-body);
 }
