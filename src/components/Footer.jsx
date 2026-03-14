@@ -10,13 +10,13 @@ function Footer() {
                 <div className="footer-title">Divine Handcrafted <br />French Pâtisserie </div>
                 <div className="d-flex flex-column footer-icons align-items-end">
                     <div className="d-flex justify-content-center my-2">
-                        <i className="bi bi-facebook mx-2"></i>
-                        <i className="bi bi-instagram mx-2"></i>
-                        <i className="bi bi-threads mx-2"></i>
-                        <i className="bi bi-envelope mx-2"></i>
+                        <a className="footer-link" href="https://www.facebook.com/" target='_blank'><i className="bi bi-facebook mx-2"></i></a>
+                        <a className="footer-link" href="https://www.instagram.com/" target='_blank'><i className="bi bi-instagram mx-2"></i></a>
+                        <a className="footer-link" href="https://www.threads.net/" target='_blank'><i className="bi bi-threads mx-2"></i></a>
+                        <a className="footer-link" href="mailto:info@divine.com" target='_blank'><i className="bi bi-envelope mx-2"></i></a>
                     </div>
                     <div>© Divine Pâtisserie</div>
-                    <div>Built with butter, cream, and a little bit of code.</div>
+                    <div className='text-end'>Built with butter, cream, and a little bit of code.</div>
 
                 </div>
                 {/* <p className="text-center fs-6">© 2024 Divine. All rights reserved.</p> */}

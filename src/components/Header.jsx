@@ -27,7 +27,7 @@ function Header () {
     }, []);
 
     return (
-        <nav className="navbar navbar-expand-lg theme-dark fixed-top">
+        <nav className="navbar navbar-expand-lg theme-dark fixed-top navbar-dark">
             <div className="container theme-dark ">
                 <div className="m-2">
                     <NavLink className="navbar-brand theme-dark " to="/">Divine</NavLink>

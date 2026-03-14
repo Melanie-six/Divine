@@ -55,8 +55,8 @@ function OrderForm() {
 
     return (<>
         <div className="container-fluid col-md-6 mx-auto">
-            <h3>訂單資訊(Order Info)</h3>
-            <table className="table">
+            <div className="orderForm-title">訂單資訊(Order Info)</div>
+            <table className="orderForm-table">
                 <thead>
                     <tr>
                     <th scope="col">商品名稱</th>
@@ -68,7 +68,7 @@ function OrderForm() {
                 <tbody>
                     {cart?.carts?.map((item) => {
                         return (
-                        <tr key={item.id}>
+                        <tr key={item.id} className="orderForm-table-body">
                             <th scope="row">{item.product.title}</th>
                             <td>{item.product.price}</td>
                             <td>{item.qty}</td>
@@ -88,9 +88,9 @@ function OrderForm() {
         <div className="container-fluid my-5">
             
             <form className="col-md-6 mx-auto" onSubmit={handleSubmit(onSubmit)}>
-                <h3>顧客資訊(Customer Info)</h3>
+                <div className="orderForm-title">顧客資訊(Customer Info)</div>
                 <div className="mb-3">
-                    <label htmlFor="name" className="form-label">
+                    <label htmlFor="name" className="orderForm-form-label">
                         收件者姓名(Name)
                     </label>
                     <input 
@@ -112,7 +112,7 @@ function OrderForm() {
                         )}
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="email" className="form-label">
+                    <label htmlFor="email" className="orderForm-form-label">
                         聯絡信箱(Email)
                     </label>
                     <input 
@@ -134,7 +134,7 @@ function OrderForm() {
                         )}
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="tel" className="form-label">
+                    <label htmlFor="tel" className="orderForm-form-label">
                         聯絡電話(Phone)
                     </label>
                     <input 
@@ -160,7 +160,7 @@ function OrderForm() {
                         )}
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="address" className="form-label">
+                    <label htmlFor="address" className="orderForm-form-label">
                         收件地址(Adress)
                     </label>
                     <input 
@@ -178,7 +178,7 @@ function OrderForm() {
                         )}
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="message" className="form-label">
+                    <label htmlFor="message" className="orderForm-form-label">
                         留言
                     </label>
                     <textarea 

@@ -28,7 +28,7 @@ function Home() {
     const chouxProducts = products.filter(item => item.category === '泡芙');
 
     return (
-        <div className="container">
+        <div className="container-fluid">
             <div className="banner mb-3">
                 <div className="main-title">Divine</div>
                 <div className="banner-sub-title">Handcrafted French Pâtisserie</div>
