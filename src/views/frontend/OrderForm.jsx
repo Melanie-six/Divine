@@ -54,7 +54,7 @@ function OrderForm() {
     };
 
     return (<>
-        <div className="col-md-6 mx-auto">
+        <div className="container-fluid col-md-6 mx-auto">
             <h3>訂單資訊(Order Info)</h3>
             <table className="table">
                 <thead>
@@ -85,7 +85,7 @@ function OrderForm() {
                 </tfoot>
                 </table>
         </div>
-        <div className="my-5">
+        <div className="container-fluid my-5">
             
             <form className="col-md-6 mx-auto" onSubmit={handleSubmit(onSubmit)}>
                 <h3>顧客資訊(Customer Info)</h3>

@@ -286,7 +286,7 @@
 }
 
 @media (max-width: 768px) {
-  .philosophy-title {
+  /* .philosophy-title {
     font-size: 2rem;
   }
   .philosophy-right {
@@ -294,7 +294,26 @@
   }
   .philosophy-title-right  {
     font-size: 2.5rem;
-  }
+  } */
+  .philosophy {
+        flex-direction: column;
+        padding: 1rem;
+        height: auto;
+    }
+    .philosophy-left {
+        width: 100%;
+        padding: 0 1rem;
+    }
+    .philosophy-right {
+        width: 100%;
+        padding: 1rem;
+    }
+    .philosophy-title {
+        font-size: 1.6rem;
+    }
+    .philosophy-title-right {
+        font-size: 2.2rem;
+    }
   .signature {
         padding: 1rem;
         height: auto;    
@@ -350,25 +369,7 @@
     .home-btn {
         padding: 0.5rem 1rem;
     }
-    .philosophy {
-        flex-direction: column;
-        padding: 1rem;
-        height: auto;
-    }
-    .philosophy-left {
-        width: 100%;
-        padding: 0 1rem;
-    }
-    .philosophy-right {
-        width: 100%;
-        padding: 1rem;
-    }
-    .philosophy-title {
-        font-size: 1.6rem;
-    }
-    .philosophy-title-right {
-        font-size: 2.2rem;
-    }
+    
     .signature-title {
         font-size: 1.6rem;
     }

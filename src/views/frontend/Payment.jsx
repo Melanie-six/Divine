@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useMessage from "../../hooks/useMessage";
 import axios from "axios";
-import '../../assets/all.css';
+import '../../assets/payment.css';
 
 
 const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
@@ -47,7 +47,7 @@ function Payment() {
             <div className="payment-title">訂單管理</div>
             <table className="payment-table">
                 <thead >
-                    <tr className="table-header">
+                    <tr className="payment-table-header">
                         <th>訂單編號</th>
                         <th>建立時間</th>
                         <th>顧客名稱</th>
@@ -59,8 +59,8 @@ function Payment() {
                 <tbody >
                     {orderlist.map((order) => {
                         return (
-                            <tr key={order.id} className="table-body">
-                                <td>{order.create_at}</td>
+                        <tr key={order.id} className="payment-table-body">
+                            <td>{order.create_at}</td>
                             <td>{new Date(order.create_at * 1000).toLocaleDateString()}</td>
                             <td>{order.user.name}</td>
                             <td>{order.total}</td>
@@ -68,8 +68,20 @@ function Payment() {
                                 <span className={order.is_paid ? 'text-success' : 'text-danger'}>
                                 {order.is_paid ? "已付款" : "未付款"}</span></td>
                             <td>
-                                <button type='button' className='btn-add-to-cart' onClick={() => payOrder(order.id)}>付款去</button>
-                                {/* <button type='button' className='btn btn-danger btn-sm' onClick={() => handleOpenModal("del", order)}>刪除訂單</button> */}
+                                {/* <button 
+                                type='button' 
+                                className='btn-add-to-cart' 
+                                onClick={() => payOrder(order.id)}>
+                                    付款去</button> */}
+                                {/* 修改 Payment.jsx 的 map 部分，讓按鈕更有彈性 */}
+                                <button 
+                                    type='button' 
+                                    className={order.is_paid ? 'btn-order-completed' : 'btn-add-to-cart'} 
+                                    onClick={() => payOrder(order.id)}
+                                    // disabled={order.is_paid}
+                                >
+                                    {order.is_paid ? "訂單完成" : "付款去"}
+                                </button>
                                 </td>
                             </tr>
                         )

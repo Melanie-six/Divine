@@ -1,0 +1,206 @@
+:root {
+  /* 核心色彩 (Core Colors) */
+  --midnight-blue: #1B263B;    /* 主色 / 深色背景 */
+  --champagne-gold: #D4AF37;   /* 強調色 / 標題色 */
+  --cream-white: #F5F5F0;      /* 背景色 / 淺色模式文字 */
+
+  /* 語義化命名 - 前台預設 (Dark Theme) */
+  --color-primary: var(--midnight-blue);
+  --color-accent: var(--champagne-gold);
+  --color-bg: var(--midnight-blue);
+  --color-text-main: var(--cream-white);
+  --color-text-title: var(--champagne-gold);
+
+  /* 字體設定 (Typography) */
+  --font-serif: 'Playfair Display';
+  --font-mono: 'Fira Code', monospace;
+  --font-title: "Songti TC", "Source Han Serif TC";
+  --font-body: "PingFang TC", "Source Han Sans TC", "Microsoft JhengHei", sans-serif;
+}
+
+.payment-table {
+    background-color: var(--midnight-blue);
+    border: 2px solid var(--color-accent);
+    border-radius: 5px;
+    overflow: hidden; 
+    font-family: var(--font-mono);
+    margin: 2rem auto;
+    width: 100%;
+}
+.payment-title, .cart-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: var(--color-text-main);
+}
+.payment-table-header {
+    background-color: var(--color-accent);
+    color: var(--midnight-blue);
+    font-size: 1.2rem;
+    font-family: var(--font-mono);
+}
+.payment-table-body {
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+    color: var(--cream-white);
+    transition: background-color 0.3s;
+    &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+        }
+}
+.btn-add-to-cart {
+    display: block;
+    width: 100%;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    color: var(--color-text-title);
+    border: 1px solid var(--color-accent);
+    font-family: var(--font-serif); 
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.btn-add-to-cart:hover {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    font-weight: bold;
+}
+.btn-order-completed {
+    display: block;
+    width: 100%;
+    padding: 12px 24px;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    color: var(--color-text-main);
+    opacity: 0.5;
+    cursor: not-allowed; 
+    border: 1px solid var(--color-text-main);
+    font-family: var(--font-serif); 
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+
+/* 讓表格在手機版轉為卡片佈局 */
+
+@media (max-width: 768px) {
+    /* 1. 基礎轉型 */
+    .payment-table thead { display: none; }
+    .payment-table, .payment-table tbody, .payment-table .payment-table-body {
+        display: block;
+        width: 100%;
+        border: none;
+    }
+
+    /* 2. 卡片容器：改用 Grid 佈局 */
+    .payment-table .payment-table-body {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 12px;
+        margin-bottom: 1.2rem;
+        padding: 0.5rem;
+        display: grid;
+        /* 分成左右兩欄：左邊自動填充，右邊固定寬度給按鈕 */
+        grid-template-columns: 40% 30% 30%; 
+        grid-template-areas: 
+            "id      time   button"
+            "name    amount button";
+        gap: 1px 2px;
+        align-items: center;
+    }
+
+    /* 3. 各個 td 的位置分配 */
+    .payment-table td {
+        display: block;
+        padding: 0 !important;
+        border: none !important;
+        background: none !important;
+    }
+
+    /* 訂單編號 (左上) */
+    .payment-table td:nth-child(1) {
+        grid-area: id;
+        font-size: 1rem;
+        font-family: var(--font-mono);
+        word-break: break-all;
+    }
+
+    /* 訂單時間 (中上 - 放在編號下方一點) */
+    .payment-table td:nth-child(2) {
+        grid-area: time;
+        opacity: 0.5;
+        font-size: 0.9rem;
+        color: var(--cream-white);
+    }
+
+    /* 收件人姓名 (左下) */
+    .payment-table td:nth-child(3) {
+        grid-area: name;
+        font-size: 1rem;
+        word-break: auto;
+    }
+    .payment-table td:nth-child(3)::before {
+        content: "收件人： ";
+        color: var(--color-accent);
+        font-size: 0.85rem;
+    }
+
+    /* 訂單金額 (中下) */
+    .payment-table td:nth-child(4) {
+        grid-area: amount;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: var(--color-accent);
+    }
+    .payment-table td:nth-child(4)::before {
+        content: "$ ";
+        font-size: 1rem;
+    }
+
+    /* 付款狀態 (右上角) */
+    .payment-table td:nth-child(5) {
+        /* grid-area: status;
+        justify-self: end;
+        align-self: start; */
+        display: none;
+    }
+
+    /* 付款按鈕 (右側垂直居中) */
+    .payment-table td:nth-child(6) {
+        grid-area: button;
+        justify-self: end;
+    }
+
+    /* 按鈕樣式微調：變成更適合放在右側的小方塊或窄長按鈕 */
+    .payment-table .btn-add-to-cart, .btn-order-completed {
+        width: 100px;
+        padding: 8px 5px;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+        border-radius: 6px;
+        white-space: nowrap;
+    }
+
+    /* 狀態標籤微調 */
+    /* .text-success, .text-danger {
+        padding: 2px 8px;
+        font-size: 0.7rem;
+        white-space: nowrap;
+    } */
+}
+
+/* @media (max-width: 425px) {
+    .payment-table {
+            display: block;
+            overflow-x: auto;
+            width: 100%;
+        }
+} */

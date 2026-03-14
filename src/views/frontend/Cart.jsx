@@ -106,8 +106,9 @@ function Cart() {
                 </tbody>
                 <tfoot className="p-3">
                     <tr className="my-3">
-                        <th colSpan="4" className="final-total">結帳總金額：</th>
-                        <th className="text-danger">{cart.final_total}</th>
+                        <th colSpan="4" className="final-total">
+                            結帳總金額：<span className="text-accent">${cart.final_total}</span>
+                        </th>
                         <th><Link to="/order" className="btn-add-to-cart">結帳去</Link></th>
                     </tr>
                 </tfoot>

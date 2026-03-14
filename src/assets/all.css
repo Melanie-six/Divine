@@ -1,3 +1,9 @@
+/* * {
+  outline: 1px solid red !important;
+} */
+* {
+    box-sizing: border-box !important;
+}
 :root {
   /* 核心色彩 (Core Colors) */
   --midnight-blue: #1B263B;    /* 主色 / 深色背景 */
@@ -229,9 +235,9 @@ body {
     opacity: 0.8;
 }
 .btn-add-to-order {
-    margin-top: 1rem;
+    margin: 1rem auto;
     display: block;
-    width: 100%;
+    width: calc(100% - 2rem);
     padding: 12px 24px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -245,11 +251,11 @@ body {
     text-align: center;
     margin: 1rem;
     &:hover {
-    background-color: var(--color-accent);
-    color: var(--color-primary);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
-    font-weight: bold;
-}
+        background-color: var(--color-accent);
+        color: var(--color-primary);
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        font-weight: bold;
+    }
 }
 
 .footer-title {
@@ -369,46 +375,149 @@ footer {
     font-family: var(--font-body);
     letter-spacing: 2px;
 }
-    @media (max-width: 768px) {
-        .sidebar .nav {
-            white-space: nowrap;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--color-accent);
-        }
-        .nav-item {
-            margin-right: 10px;
-        }
-        .category-link {
-            padding: 6px 15px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 20px;
-        }
+.overflow-x-auto::-webkit-scrollbar {
+    display: none;
+}
+.overflow-x-auto {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+}
+@media (max-width: 768px) {
+    .sidebar .nav {
+        white-space: nowrap;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--color-accent);
     }
-    .overflow-x-auto::-webkit-scrollbar {
+    .nav-item {
+        margin-right: 10px;
+    }
+    .category-link {
+        padding: 6px 15px;
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 20px;
+    }
+    /* 1. 隱藏表格標題頭部 */
+    .cart-table thead {
         display: none;
     }
-    .overflow-x-auto {
-        -ms-overflow-style: none;  
-        scrollbar-width: none;  
-    }
-    @media (max-width: 425px) {
-        .image-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .content-container {
-            width: 100%;
-            border: 1px solid var(--color-accent);
-            padding: 20px;
-        }
-        .notfound-image {
-            width: 250px;
-            height: 250px;
-        }
-        .notfound-text {
-            font-size: 1.5rem;
-        }
 
+    /* 2. 讓表格本體、每一行、每一格都變成區塊元素 */
+    .cart-table, .cart-table tbody, .table-body, .table-body td {
+        display: block;
+        width: 100%;
     }
+
+    /* 3. 每一行商品就是一個卡片容器 */
+    .table-body {
+        position: relative; /* 為了讓垃圾桶絕對定位 */
+        padding: 1.5rem 1rem 1rem 110px !important; /* 左側留空間給圖片 */
+        min-height: 120px;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.3) !important;
+    }
+
+    /* 4. 圖片絕對定位到左側 */
+    .table-body td:first-child {
+        position: absolute;
+        top: 1.5rem;
+        left: 10px;
+        width: 80px;
+        padding: 0 !important;
+    }
+
+    .cart-img {
+        width: 90px !important;
+        height: 90px !important;
+    }
+
+    /* 5. 隱藏不需要在卡片中獨立成行的標籤（如價格前的文字或重複的小計） */
+    .table-body td:nth-child(3) { /* 價格 */
+        position: absolute;
+        top: 4.5rem;
+        left: 120px;
+        font-size: 1.2rem;
+        color: var(--color-accent);
+        width: 50%;
+        /* margin-bottom: 0.5rem; */
+    }
+
+    /* 6. 數量控制項與垃圾桶的排列 */
+    .table-body td:nth-child(4) { /* 數量控制 */
+        position: absolute;
+        top: 4.2rem;
+        right: 20px;
+        display: flex;
+        justify-content: flex-end;
+        width: 50%;
+    }
+
+    .table-body td:nth-child(5) { /* 小計（在手機版通常可以隱藏或併入價格） */
+        display: none;
+    }
+
+    /* 7. 垃圾桶絕對定位到右上角 */
+    .table-body td:last-child {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        width: auto;
+    }
+
+    .btn-del-qty {
+        font-size: 1.2rem;
+        padding: 5px;
+        border: none;
+    }
+
+    /* 8. 底部結帳區塊轉為垂直排列 */
+    .cart-table tfoot, .cart-table tfoot tr, .cart-table tfoot th {
+        display: block;
+        width: 100%;
+        text-align: center !important;
+    }
+
+    .final-total {
+        font-size: 1.2rem;
+        margin-top: 1rem;
+    }
+
+    .btn-add-to-cart {
+        margin: 1rem 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 425px) {
+    .image-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .content-container {
+        width: 100%;
+        border: 1px solid var(--color-accent);
+        padding: 20px;
+    }
+    .notfound-image {
+        width: 250px;
+        height: 250px;
+    }
+    .notfound-text {
+        font-size: 1.5rem;
+    }
+    .cart-table, .payment-table {
+        display: block;
+        overflow-x: auto;
+        width: 100%;
+    }
+    .cart-img {
+        width: 60px; 
+        height: 60px;
+    }
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+        overflow: hidden;
+    }
+
+}

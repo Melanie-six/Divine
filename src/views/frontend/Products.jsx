@@ -62,7 +62,7 @@ function Products() {
     }
 
     return (<>
-    <div className="container theme-dark p-1">
+    <div className="container theme-dark">
         <div className="row">
             <div className="sidebar col-lg-3 mb-4">
                 <ul className="nav d-flex flex-row flex-lg-column justify-content-start overflow-x-auto flex-nowrap">
