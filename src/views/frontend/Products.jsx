@@ -1,19 +1,38 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Link } from "react-router";
 import useMessage from '../../hooks/useMessage';
 import '../../assets/all.css';
+import Pagination from '../../components/Pagination';
 
 const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
 function Products() {
 
     const [products, setProducts] = useState([]);
+    const [pageInfo, setPageInfo] = useState({});
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('all');
     const { showError, showSuccess } = useMessage();
 
+    const getProducts = useCallback(async (page = 1) => {
+            try {
+                const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/products`, 
+                    {
+                        params: {
+                            page,
+                            category: selectedCategory === 'all' ? undefined : selectedCategory
+                        }
+                    }
+                );
+                setProducts(res.data.products);
+                setPageInfo(res.data.pagination);
+            } catch (error) {
+                console.log(error.response);
+            }
+        }, [selectedCategory]);
+        
     useEffect(() => {
         const getAllProducts = async () => {
             try {
@@ -28,23 +47,7 @@ function Products() {
             }
         };
         getAllProducts();
-        const getProducts = async (page = 1, category) => {
-            try {
-                const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/products`, 
-                    {
-                        params: {
-                            page,
-                            category: category === 'all' ? undefined : category
-                        }
-                    }
-                );
-                setProducts(res.data.products);
-            } catch (error) {
-                console.log(error.response);
-            }
-        };
-        getProducts(1, selectedCategory);
-    },[selectedCategory])
+    },[])
 
     const addCart = async (id, qty=1) => {
         try {
@@ -60,6 +63,15 @@ function Products() {
             showError("加入購物車失敗");
         }
     }
+    useEffect(() => {
+        getProducts(1);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [getProducts]);
+
+     const handlePageChange = (page) => {
+        getProducts(page);
+        window.scrollTo(0, 0);
+    };
 
     return (<>
     <div className="container theme-dark">
@@ -103,6 +115,9 @@ function Products() {
                             </div>      
                         )
                     })}
+                </div>
+                <div className="d-flex justify-content-center mt-3">
+                    <Pagination pageInfo={pageInfo} handlePageChange={handlePageChange} />
                 </div>
             </div>
         </div>

@@ -42,9 +42,9 @@
     bottom: 5px;
     right: 15px;
 }
-.border-success { border-color: var(--champagne-gold) !important; } /* 圖片中的金色邊框 */
+.border-success { border-color: var(--champagne-gold) !important; } 
 .tag-success { color: var(--champagne-gold); }
-.border-danger { border-color: #e57373 !important; } /* 圖片中的粉紅邊框 */
+.border-danger { border-color: #e57373 !important; } 
 .tag-danger { color: #e57373; }
 .toast-icon-circle {
     width: 32px;

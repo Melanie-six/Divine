@@ -10,8 +10,8 @@
   --color-text-main: var(--cream-white);
   --color-text-title: var(--champagne-gold);
   /* 字體設定 (Typography) */
-  --font-serif: 'Playfair Display'; /* 優雅標題 */
-  --font-mono: 'Fira Code', monospace;     /* 邏輯/代碼 */
+  --font-serif: 'Playfair Display'; 
+  --font-mono: 'Fira Code', monospace; 
   --font-title: "Songti TC", "Source Han Serif TC";
   --font-body: "PingFang TC", "Source Han Sans TC", "Microsoft JhengHei", sans-serif;
 }
@@ -286,15 +286,6 @@
 }
 
 @media (max-width: 768px) {
-  /* .philosophy-title {
-    font-size: 2rem;
-  }
-  .philosophy-right {
-    padding: 2rem;
-  }
-  .philosophy-title-right  {
-    font-size: 2.5rem;
-  } */
   .philosophy {
         flex-direction: column;
         padding: 1rem;
