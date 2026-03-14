@@ -79,8 +79,9 @@ function OrderForm() {
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th scope="row" colSpan="3" className="text-end">總計</th>
-                        <td>{cart.final_total}</td>
+                        <th scope="row" colSpan="2" className="text-end orderForm-table-footer">總計</th>
+                        <td></td>
+                        <td className="orderForm-table-footer">{cart.final_total}</td>
                     </tr>
                 </tfoot>
                 </table>

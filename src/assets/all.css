@@ -240,6 +240,11 @@ body {
 .orderForm-table-body {
     height: 40px;
 }
+.orderForm-table-footer {
+    color: var(--cream-white);
+    height: 40px;
+    margin-right: 20px;
+}
 .btn-del-qty {
     color: var(--color-accent);  
     opacity: 0.8;
