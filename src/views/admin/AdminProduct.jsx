@@ -74,7 +74,7 @@ function AdminProduct() {
       }
     };
     getProductsOnInit();
-  }, []);
+  }, [showSuccess, showError]);
 
   const handlePageChange = (page) => {
     getProducts(page);

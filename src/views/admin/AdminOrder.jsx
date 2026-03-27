@@ -55,7 +55,7 @@ function AdminOrder() {
       }
     };
     getOrdersInit();
-  }, []);
+  }, [showSuccess, showError]);
 
   const getOrders = async (page = 1) => {
     try {

@@ -4,6 +4,7 @@
 [v] 全域搜尋並刪除 console.log
 [v] 格式統一（2格縮排）
 [v] HTML Meta 設定
+[v] 修正 Dependency 警告
 
 已完成工作：
 [v] 決定品牌名稱與網站主色調。
