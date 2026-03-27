@@ -29,7 +29,7 @@ function Products() {
                 setProducts(res.data.products);
                 setPageInfo(res.data.pagination);
             } catch (error) {
-                console.log(error.response);
+                console.error(error.response);
             }
         }, [selectedCategory]);
         
@@ -43,7 +43,7 @@ function Products() {
                 ];
                 setCategories(result);
             } catch (error) {
-                console.log(error.response);
+                console.error(error.response);
             }
         };
         getAllProducts();
@@ -59,7 +59,7 @@ function Products() {
             showSuccess("已加入購物車");
             window.dispatchEvent(new Event("cart-updated"));
         } catch (error) {
-            console.log(error.response);
+            console.error(error.response);
             showError("加入購物車失敗");
         }
     }

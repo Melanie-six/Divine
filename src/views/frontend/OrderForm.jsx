@@ -28,14 +28,14 @@ function OrderForm() {
             const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
             setCart(res.data.data);
         } catch (error) {
-            console.log(error.response);
+            console.error(error.response);
         }
     };
         getCart();
     },[]);
 
     const onSubmit = async (formData) => {
-        console.log(formData);
+        // console.log(formData);
         try {
             const data = {
                 user: formData,
@@ -48,7 +48,7 @@ function OrderForm() {
             setCart(res2.data.data);
             showSuccess("訂單已成功提交");
         } catch (error) {
-            console.log(error.response)
+            console.error(error.response)
             showError("提交訂單失敗");
         };
     };

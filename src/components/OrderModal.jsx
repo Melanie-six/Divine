@@ -92,7 +92,7 @@ function OrderModal ({modalType, templateData, isModalOpen, setIsModalOpen, getO
             getOrders(currentPage);
             showSuccess('訂單更新成功');
         } catch (error) {
-            console.log(error.response);
+            console.error(error.response);
             showError('訂單更新失敗')
         }
     };
@@ -104,7 +104,7 @@ function OrderModal ({modalType, templateData, isModalOpen, setIsModalOpen, getO
             handleCloseModal();
             showSuccess('訂單刪除成功');
         } catch (error) {
-            console.log(error.response);
+            console.error(error.response);
             showError('訂單刪除失敗')
         }
     }; 

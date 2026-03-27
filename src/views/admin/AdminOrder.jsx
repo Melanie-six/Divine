@@ -48,7 +48,7 @@ function AdminOrder() {
         showSuccess("訂單列表載入成功");
         setPageInfo(res.data.pagination);
         } catch (error) {
-            console.log(error.response);
+            console.error(error.response);
             showError(error.response.data.message)
         }
     };
@@ -63,7 +63,7 @@ function AdminOrder() {
         showSuccess("訂單列表載入成功");
         setPageInfo(res.data.pagination);
         } catch (error) {
-            console.log(error.response);
+            console.error(error.response);
             showError(error.response.data.message)
         }
     };

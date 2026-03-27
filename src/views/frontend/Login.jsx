@@ -36,7 +36,7 @@ function Login() {
             navigate('/admin/products');
             showSuccess("登入成功");
         } catch(error) {
-            console.log(error.response);
+            console.error(error.response);
         }
     };
 

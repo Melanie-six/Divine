@@ -25,7 +25,7 @@ function ProtectedRoute({ children }) {
         setIsAuth(true);
         } catch(error) {
             setIsAuth(false);
-            console.log(error.response);
+            console.error(error.response);
         } finally {
             setLoading(false);
         }

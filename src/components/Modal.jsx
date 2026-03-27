@@ -107,7 +107,7 @@ function Modal ({modalType, templateData, isModalOpen, setIsModalOpen, getProduc
             imageUrl: uploadedImageUrl
             })
         } catch (error) {
-            console.log(error.response);
+            console.error(error.response);
         }
     };
 
@@ -131,23 +131,22 @@ function Modal ({modalType, templateData, isModalOpen, setIsModalOpen, getProduc
 
         try {
             const res = await axios[method](url, productData);
-            console.log(res.data);
+            // console.log(res.data);
             handleCloseModal();
             dispatch(createAsyncMessage(res.data))
             getProducts(currentPage);
         } catch (error) {
-            console.log(error.response);
+            console.error(error.response);
         }
     };
 
     const delProduct = async (id) => {
         try {
-            const res = await axios.delete(`${VITE_API_BASE}/api/${VITE_API_PATH}/admin/product/${id}`);
-            console.log(res.data);
+            await axios.delete(`${VITE_API_BASE}/api/${VITE_API_PATH}/admin/product/${id}`);
             getProducts();
             handleCloseModal();
         } catch (error) {
-            console.log(error.response);
+            console.error(error.response);
         }
     }; 
 

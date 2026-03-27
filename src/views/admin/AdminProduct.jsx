@@ -48,7 +48,7 @@ function AdminProduct() {
             setPageInfo(res.data.pagination);
             showSuccess("產品列表載入成功");
         } catch (error) {
-            console.log(error.response);
+            console.error(error.response);
             // dispatch(createAsyncMessage(error.response.data));
             showError(error.response.data.message)
         }

@@ -16,7 +16,8 @@ function Header () {
                 const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
                 setCartCount(res.data.data.carts.length);
             } catch (error) {
-                console.log(error.response);
+                console.error(error.response);
+                alert("取得購物車資料失敗，請稍後再試。");
             }
         };
         getCart();

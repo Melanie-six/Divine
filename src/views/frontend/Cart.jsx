@@ -18,7 +18,7 @@ function Cart() {
                 const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
                 setCart(res.data.data);
             } catch (error) {
-                console.log(error.response);
+                console.error(error.response);
             }
         };
         getCart();
@@ -36,7 +36,7 @@ function Cart() {
             setCart(res2.data.data);
             showSuccess("已更新商品數量");
         } catch (error) {
-            console.log(error.response)
+            console.error(error.response)
             showError("更新商品數量失敗");
         };
     };
@@ -48,7 +48,7 @@ function Cart() {
             setCart(res2.data.data);
             showSuccess("已刪除商品");
         } catch (error) {
-            console.log(error.response)
+            console.error(error.response)
             showError("刪除商品失敗");
         }
     };
