@@ -1,79 +1,79 @@
-import FrontendLayout from "../layout/FrontendLayout";
-import Home from "../views/frontend/Home";
-import About from "../views/frontend/About";
-import Products from "../views/frontend/Products";
-import Cart from "../views/frontend/Cart";
-import Login from "../views/frontend/Login";
-import NotFound from "../views/frontend/NotFound";
-import AdminOrder from "../views/admin/AdminOrder";
-import AdminProduct from "../views/admin/AdminProduct";
-import AdminLayout from "../layout/AdminLayout";
-import SingleProduct from "../views/frontend/SingleProduct";
-import OrderForm from "../views/frontend/OrderForm";
-import ProtectedRoute from "../components/ProtectedRoute";
-import Payment from "../views/frontend/Payment";
-
-
-
-
+import FrontendLayout from '../layout/FrontendLayout';
+import Home from '../views/frontend/Home';
+import About from '../views/frontend/About';
+import Products from '../views/frontend/Products';
+import Cart from '../views/frontend/Cart';
+import Login from '../views/frontend/Login';
+import NotFound from '../views/frontend/NotFound';
+import AdminOrder from '../views/admin/AdminOrder';
+import AdminProduct from '../views/admin/AdminProduct';
+import AdminLayout from '../layout/AdminLayout';
+import SingleProduct from '../views/frontend/SingleProduct';
+import OrderForm from '../views/frontend/OrderForm';
+import ProtectedRoute from '../components/ProtectedRoute';
+import Payment from '../views/frontend/Payment';
 
 const routes = [
-    {
-        path: "/",
-        element: <FrontendLayout />,
-        children: [
-            {
-                index: true,
-                element: <Home />,
-            },
-            {
-                path: "about",
-                element: <About />,
-            },
-            {
-                path: "products",
-                element: <Products />,
-            },
-            {
-                path: "product/:id",
-                element: <SingleProduct />,
-            },
-            {
-                path: "cart",
-                element: <Cart />,
-            },
-            {
-                path: "order",
-                element: <OrderForm />,
-            },
-            {
-                path: "pay",
-                element: <Payment />,
-            },
-            {
-                path: "login",
-                element: <Login />,
-            },
-        ]
-    },
-    {
-        path: "/admin",
-        element: <ProtectedRoute><AdminLayout /></ProtectedRoute>,
-        children: [
-            {
-                path: "products",
-                element: <AdminProduct />,
-            },
-            {
-                path: "orders",
-                element: <AdminOrder />,
-            }
-        ]
-    },
-    {
-        path: "*",
-        element: <NotFound />
-    }
+  {
+    path: '/',
+    element: <FrontendLayout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: 'about',
+        element: <About />,
+      },
+      {
+        path: 'products',
+        element: <Products />,
+      },
+      {
+        path: 'product/:id',
+        element: <SingleProduct />,
+      },
+      {
+        path: 'cart',
+        element: <Cart />,
+      },
+      {
+        path: 'order',
+        element: <OrderForm />,
+      },
+      {
+        path: 'pay',
+        element: <Payment />,
+      },
+      {
+        path: 'login',
+        element: <Login />,
+      },
+    ],
+  },
+  {
+    path: '/admin',
+    element: (
+      <ProtectedRoute>
+        <AdminLayout />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: 'products',
+        element: <AdminProduct />,
+      },
+      {
+        path: 'orders',
+        element: <AdminOrder />,
+      },
+    ],
+  },
+  {
+    path: '*',
+    element: <NotFound />,
+  },
 ];
 
 export default routes;

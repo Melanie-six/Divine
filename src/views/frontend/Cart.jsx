@@ -1,119 +1,152 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { Link } from "react-router";
-import useMessage from "../../hooks/useMessage";
+import { Link } from 'react-router';
+import useMessage from '../../hooks/useMessage';
 import '../../assets/all.css';
 
-const {VITE_API_BASE, VITE_API_PATH} = import.meta.env;
+const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
 function Cart() {
+  const [cart, setCart] = useState([]);
+  const { showError, showSuccess } = useMessage();
 
-    const [cart, setCart] = useState([]);
-    const { showError, showSuccess } = useMessage();
-
-    useEffect(() => {
-        const getCart = async () => {
-            try {
-                const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
-                setCart(res.data.data);
-            } catch (error) {
-                console.error(error.response);
-            }
-        };
-        getCart();
-    },[]);
-
-    const updateQty = async (cartId, productId, qty=1) => {
-        if (qty < 1 || qty > 10) return;
-        try {
-            const data ={
-                product_id: productId,
-                qty
-            }
-            await axios.put(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart/${cartId}`, {data});
-            const res2 = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
-            setCart(res2.data.data);
-            showSuccess("已更新商品數量");
-        } catch (error) {
-            console.error(error.response)
-            showError("更新商品數量失敗");
-        };
+  useEffect(() => {
+    const getCart = async () => {
+      try {
+        const res = await axios.get(
+          `${VITE_API_BASE}/api/${VITE_API_PATH}/cart`,
+        );
+        setCart(res.data.data);
+      } catch (error) {
+        console.error(error.response);
+      }
     };
+    getCart();
+  }, []);
 
-    const deleteQty = async (cartId) => {
-        try {
-            await axios.delete(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart/${cartId}`);
-            const res2 = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
-            setCart(res2.data.data);
-            showSuccess("已刪除商品");
-        } catch (error) {
-            console.error(error.response)
-            showError("刪除商品失敗");
-        }
-    };
+  const updateQty = async (cartId, productId, qty = 1) => {
+    if (qty < 1 || qty > 10) return;
+    try {
+      const data = {
+        product_id: productId,
+        qty,
+      };
+      await axios.put(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart/${cartId}`, {
+        data,
+      });
+      const res2 = await axios.get(
+        `${VITE_API_BASE}/api/${VITE_API_PATH}/cart`,
+      );
+      setCart(res2.data.data);
+      showSuccess('已更新商品數量');
+    } catch (error) {
+      console.error(error.response);
+      showError('更新商品數量失敗');
+    }
+  };
 
+  const deleteQty = async (cartId) => {
+    try {
+      await axios.delete(
+        `${VITE_API_BASE}/api/${VITE_API_PATH}/cart/${cartId}`,
+      );
+      const res2 = await axios.get(
+        `${VITE_API_BASE}/api/${VITE_API_PATH}/cart`,
+      );
+      setCart(res2.data.data);
+      showSuccess('已刪除商品');
+    } catch (error) {
+      console.error(error.response);
+      showError('刪除商品失敗');
+    }
+  };
 
-    return (<>
-        <div className="container mb-3 d-flex justify-content-between">
-            <div className="cart-title">購物車</div>
-            <div>
-                {/* <button className="btn btn-outline-danger me-3">清空購物車</button> */}
-            </div>
+  return (
+    <>
+      <div className="container mb-3 d-flex justify-content-between">
+        <div className="cart-title">購物車</div>
+        <div>
+          {/* <button className="btn btn-outline-danger me-3">清空購物車</button> */}
         </div>
-        <div className="container">
-            <table className="cart-table">
-                <thead >
-                    <tr className="table-header">
-                        <th>產品圖示</th>
-                        <th>產品名稱</th>
-                        <th>價格</th>
-                        <th>數量</th>
-                        <th>小計</th>
-                        <th>刪除</th>
-                    </tr>
-                </thead>
-                <tbody >
-                    { cart?.carts?.map(item => {
-                        return (
-                            <tr key={item.id} className="table-body">
-                                <td ><img className="cart-img" src={item.product.imageUrl} alt={item.product.title} /></td>
-                                <td>{item.product.title}</td>
-                                <td>NT$ {item.product.price}</td>
-                                <td>
-                                    <div className="qty-control">
-                                        <button className="btn-qty"
-                                        onClick={() => updateQty(item.id, item.product.id, item.qty - 1)}
-                                            disabled={item.qty <= 1}
-                                            >-</button>
-                                        <span className="qty-number">{item.qty}</span>
-                                        <button className="btn-qty"
-                                        onClick={() => updateQty(item.id, item.product.id, item.qty + 1)}
-                                            disabled={item.qty >= 10}
-                                            >+</button>
-                                    </div>
-                                </td>
-                                <td>NT$ {item.final_total}</td>
-                                <td>
-                                    <button className="btn-del-qty" 
-                                        onClick={() => deleteQty(item.id)}>
-                                        <i className="bi bi-trash3-fill">
-                                        </i>
-                                    </button>
-                                </td>
-                            </tr>
-                        )})}
-                </tbody>
-                <tfoot className="p-3">
-                    <tr className="my-3">
-                        <th colSpan="4" className="final-total">
-                            結帳總金額：<span className="text-accent">${cart.final_total}</span>
-                        </th>
-                        <th><Link to="/order" className="btn-add-to-cart mx-1">結帳去</Link></th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-    </>)
-};
+      </div>
+      <div className="container">
+        <table className="cart-table">
+          <thead>
+            <tr className="table-header">
+              <th>產品圖示</th>
+              <th>產品名稱</th>
+              <th>價格</th>
+              <th>數量</th>
+              <th>小計</th>
+              <th>刪除</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cart?.carts?.map((item) => {
+              return (
+                <tr key={item.id} className="table-body">
+                  <td>
+                    <img
+                      className="cart-img"
+                      src={item.product.imageUrl}
+                      alt={item.product.title}
+                    />
+                  </td>
+                  <td>{item.product.title}</td>
+                  <td>NT$ {item.product.price}</td>
+                  <td>
+                    <div className="qty-control">
+                      <button
+                        className="btn-qty"
+                        onClick={() =>
+                          updateQty(item.id, item.product.id, item.qty - 1)
+                        }
+                        disabled={item.qty <= 1}
+                      >
+                        -
+                      </button>
+                      <span className="qty-number">{item.qty}</span>
+                      <button
+                        className="btn-qty"
+                        onClick={() =>
+                          updateQty(item.id, item.product.id, item.qty + 1)
+                        }
+                        disabled={item.qty >= 10}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </td>
+                  <td>NT$ {item.final_total}</td>
+                  <td>
+                    <button
+                      className="btn-del-qty"
+                      onClick={() => deleteQty(item.id)}
+                    >
+                      <i className="bi bi-trash3-fill"></i>
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+          <tfoot className="p-3">
+            <tr className="my-3">
+              <th colSpan="4" className="final-total">
+                結帳總金額：
+                <span className="text-accent">${cart.final_total}</span>
+              </th>
+              <th>
+                <Link to="/order" className="btn-add-to-cart mx-1">
+                  結帳去
+                </Link>
+              </th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </>
+  );
+}
 export default Cart;
