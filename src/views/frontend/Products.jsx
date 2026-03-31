@@ -1,7 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Link } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { getCart } from '../../slice/cartSlice';
 import useMessage from '../../hooks/useMessage';
 import '../../assets/all.css';
 import Pagination from '../../components/Pagination';
@@ -13,18 +15,19 @@ function Products() {
   const [pageInfo, setPageInfo] = useState({});
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [currentPage, setCurrentPage] = useState(1);
   const { showError, showSuccess } = useMessage();
+  const dispatch = useDispatch();
 
-  const getProducts = useCallback(
-    async (page = 1) => {
+  useEffect(() => {
+    const fetchProducts = async () => {
       try {
         const res = await axios.get(
           `${VITE_API_BASE}/api/${VITE_API_PATH}/products`,
           {
             params: {
-              page,
-              category:
-                selectedCategory === 'all' ? undefined : selectedCategory,
+              page: currentPage,
+              category: selectedCategory === 'all' ? undefined : selectedCategory,
             },
           },
         );
@@ -32,10 +35,12 @@ function Products() {
         setPageInfo(res.data.pagination);
       } catch (error) {
         console.error(error.response);
+        showError('獲取產品資訊失敗');
       }
-    },
-    [selectedCategory],
-  );
+    };
+
+    fetchProducts();
+  }, [selectedCategory]);
 
   useEffect(() => {
     const getAllProducts = async () => {
@@ -50,6 +55,7 @@ function Products() {
         setCategories(result);
       } catch (error) {
         console.error(error.response);
+        showError('獲取產品類別失敗');
       }
     };
     getAllProducts();
@@ -63,20 +69,20 @@ function Products() {
       };
       await axios.post(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`, { data });
       showSuccess('已加入購物車');
-      window.dispatchEvent(new Event('cart-updated'));
+      dispatch(getCart());
     } catch (error) {
       console.error(error.response);
       showError('加入購物車失敗');
     }
   };
-  useEffect(() => {
-    getProducts(1);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getProducts]);
 
   const handlePageChange = (page) => {
-    getProducts(page);
+    setCurrentPage(page); // 觸發第一個 useEffect 抓取資料
     window.scrollTo(0, 0);
+  };
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+    setCurrentPage(1); // 切換分類時，務必重設為第一頁
   };
 
   return (
@@ -93,7 +99,7 @@ function Products() {
                                 ${selectedCategory === category ? 'active' : ''}`}
                       onClick={(e) => {
                         e.preventDefault();
-                        setSelectedCategory(category);
+                        handleCategoryChange(category);
                       }}
                       href="#"
                     >
@@ -125,7 +131,7 @@ function Products() {
                           Details
                         </Link>
                         <button
-                          type="btn"
+                          type="button"
                           className="btn-cart"
                           onClick={() => addCart(product.id)}
                         >

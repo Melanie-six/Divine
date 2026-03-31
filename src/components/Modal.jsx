@@ -15,7 +15,9 @@ function Modal({
   currentPage,
 }) {
   const [modalData, setModalData] = useState(templateData);
-
+  useEffect(() => {
+    setModalData(templateData);
+  }, [templateData]);
   const dispatch = useDispatch();
 
   const modalRef = useRef(null);
@@ -124,7 +126,11 @@ function Modal({
         imageUrl: uploadedImageUrl,
       });
     } catch (error) {
-      console.error(error.response);
+      const message = error.response?.data?.message || '圖片上傳失敗';
+        dispatch(createAsyncMessage({
+          success: false,
+          message: message
+        }));
     }
   };
 
@@ -148,12 +154,16 @@ function Modal({
 
     try {
       const res = await axios[method](url, productData);
-      // console.log(res.data);
+      //
       handleCloseModal();
       dispatch(createAsyncMessage(res.data));
       getProducts(currentPage);
     } catch (error) {
-      console.error(error.response);
+      const message = error.response?.data?.message || '更新產品失敗';
+        dispatch(createAsyncMessage({
+          success: false,
+          message: message
+        }));
     }
   };
 
@@ -165,7 +175,11 @@ function Modal({
       getProducts();
       handleCloseModal();
     } catch (error) {
-      console.error(error.response);
+      const message = error.response?.data?.message || '刪除產品失敗';
+        dispatch(createAsyncMessage({
+          success: false,
+          message: message
+        }));
     }
   };
 

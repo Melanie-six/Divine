@@ -52,7 +52,6 @@ function AdminProduct() {
         showSuccess('產品列表載入成功');
       } catch (error) {
         console.error(error.response);
-        // dispatch(createAsyncMessage(error.response.data));
         showError(error.response.data.message);
       }
     },

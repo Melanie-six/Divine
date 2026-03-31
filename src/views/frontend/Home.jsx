@@ -7,11 +7,13 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router';
 import '../../assets/home.css';
+import useMessage from '../../hooks/useMessage';
 
 const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
 function Home() {
   const [products, setProducts] = useState([]);
+  const { showError } = useMessage();
 
   useEffect(() => {
     const getProducts = async () => {
@@ -22,10 +24,11 @@ function Home() {
         setProducts(res.data.products);
       } catch (error) {
         console.error('Error fetching products:', error);
+        showError('獲取產品資訊失敗');
       }
     };
     getProducts();
-  }, []);
+  }, [showError]);
 
   const chouxProducts = products.filter((item) => item.category === '泡芙');
 

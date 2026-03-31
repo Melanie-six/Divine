@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { getCart } from '../../slice/cartSlice';
 import useMessage from '../../hooks/useMessage';
 import '../../assets/all.css';
 
@@ -8,6 +10,7 @@ const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
 function OrderForm() {
   const { showError, showSuccess } = useMessage();
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -28,10 +31,11 @@ function OrderForm() {
         setCart(res.data.data);
       } catch (error) {
         console.error(error.response);
+        showError('獲取購物車資訊失敗');
       }
     };
     getCart();
-  }, []);
+  }, [showError]);
 
   const onSubmit = async (formData) => {
     // console.log(formData);
@@ -48,6 +52,7 @@ function OrderForm() {
       );
       setCart(res2.data.data);
       showSuccess('訂單已成功提交');
+      dispatch(getCart());
     } catch (error) {
       console.error(error.response);
       showError('提交訂單失敗');

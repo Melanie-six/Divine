@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Link } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { getCart } from '../../slice/cartSlice';
 import useMessage from '../../hooks/useMessage';
 import '../../assets/all.css';
 
@@ -10,6 +12,7 @@ const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 function Cart() {
   const [cart, setCart] = useState([]);
   const { showError, showSuccess } = useMessage();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getCart = async () => {
@@ -20,10 +23,11 @@ function Cart() {
         setCart(res.data.data);
       } catch (error) {
         console.error(error.response);
+        showError('獲取購物車資訊失敗');
       }
     };
     getCart();
-  }, []);
+  }, [showError]);
 
   const updateQty = async (cartId, productId, qty = 1) => {
     if (qty < 1 || qty > 10) return;
@@ -56,21 +60,21 @@ function Cart() {
       );
       setCart(res2.data.data);
       showSuccess('已刪除商品');
+      dispatch(getCart());
     } catch (error) {
       console.error(error.response);
       showError('刪除商品失敗');
     }
   };
 
-  return (
-    <>
+  return (<>
+    
+      <>
       <div className="container mb-3 d-flex justify-content-between">
         <div className="cart-title">購物車</div>
-        <div>
-          {/* <button className="btn btn-outline-danger me-3">清空購物車</button> */}
-        </div>
       </div>
       <div className="container">
+        { cart?.carts?.length > 0 ? (
         <table className="cart-table">
           <thead>
             <tr className="table-header">
@@ -145,8 +149,15 @@ function Cart() {
             </tr>
           </tfoot>
         </table>
+        ) : (
+          <div className=" d-flex justify-content-center flex-column align-items-center">
+            <div>購物車空空如也，趕緊去把喜歡的甜點帶回家吧！</div>
+            <div><Link className="btn-add-to-cart my-3" to="/products">去逛逛</Link></div>
+          </div>
+        )}
       </div>
     </>
+  </>  
   );
 }
 export default Cart;

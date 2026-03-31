@@ -9,7 +9,7 @@ const { VITE_API_BASE } = import.meta.env;
 
 function Login() {
   const navigate = useNavigate();
-  const { showSuccess } = useMessage();
+  const { showSuccess, showError } = useMessage();
 
   const {
     register,
@@ -39,6 +39,7 @@ function Login() {
       showSuccess('登入成功');
     } catch (error) {
       console.error(error.response);
+      showError('登入失敗');
     }
   };
 

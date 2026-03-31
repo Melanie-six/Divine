@@ -17,6 +17,7 @@ function Payment() {
       setOrderlist(res.data.orders);
     } catch (error) {
       console.error(error.response);
+      showError('獲取訂單資訊失敗');
     }
   };
 
@@ -29,10 +30,11 @@ function Payment() {
         setOrderlist(res.data.orders);
       } catch (e) {
         console.error(e);
+        showError('獲取訂單資訊失敗');
       }
     };
     init();
-  }, []);
+  }, [showError]);
 
   const payOrder = async (orderId) => {
     try {
