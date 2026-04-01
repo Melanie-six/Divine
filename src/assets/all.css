@@ -29,8 +29,20 @@ body {
   color: var(--color-text-main);
   padding-top: 70px;
 }
+.min-vh-100 {
+  min-height: 100vh !important;
+}
+.flex-grow-1 {
+  flex-grow: 1 !important;
+}
+.login-wrapper {
+  min-height: calc(100vh - 70px); 
+  width: 100%;
+  padding: 2rem 0; 
+  background-color: var(--color-bg);
+}
 .login {
-  margin: 2rem auto;
+  margin: 0 auto ; 
 }
 .theme-dark {
   background-color: var(--color-bg);
@@ -153,9 +165,12 @@ body {
 }
 .btn-add-to-cart,
 .btn-del-qty {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  padding: 12px 24px;
+  min-height: 54px;
+  padding: 0 24px;
   cursor: pointer;
   transition: all 0.3s ease;
   background-color: transparent;
@@ -165,9 +180,18 @@ body {
   font-size: 1.1rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-  text-align: center;
 }
-
+.btn-add-to-cart:disabled, .btn-del-qty:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+  background-color: var(--color-accent); 
+  border: 1px solid var(--color-accent);
+}
+.loading-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .btn-add-to-cart:hover {
   background-color: var(--color-accent);
   color: var(--color-primary);
@@ -378,11 +402,28 @@ footer {
   color: var(--color-bg);
   border: 1px solid var(--color-accent);
   border-radius: 3px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  transition: all 0.3s ease;
   &:hover {
     background-color: var(--color-text-main);
     color: var(--color-bg);
     border: 1px solid var(--color-accent);
   }
+}
+.btn-cart:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+  /* 保持金色背景，但讓圖示清晰 */
+  background-color: var(--color-accent); 
+}
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1; /* 防止行高撐開 */
 }
 .cart-badge {
   background-color: var(--color-bg);
@@ -436,6 +477,13 @@ footer {
   width: 500px;
   height: 500px;
   object-fit: cover;
+}
+.empty-cart {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 2rem;
 }
 .notfound-text {
   font-size: 3rem;
@@ -560,6 +608,10 @@ footer {
 
 @media (max-width: 425px) {
   .notfound-image {
+    width: 250px;
+    height: 250px;
+  }
+  .empty-cart {
     width: 250px;
     height: 250px;
   }

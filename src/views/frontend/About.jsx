@@ -1,10 +1,16 @@
 import { useEffect, useRef } from 'react';
+import AOS from 'aos';
 import '../../assets/about.css';
 
 function About() {
   const containerRef = useRef(null);
 
   useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true, 
+      offset: 100,
+    });
     const element = containerRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
@@ -56,8 +62,8 @@ function About() {
 
           <p className="text-big">因為我們相信：真正的奢華，來自於細節。</p>
         </div>
-        <div className="story">
-          <div className="story-left">
+        <div className="story py-5">
+          <div className="story-left" data-aos="fade-right">
             <div className="story-title">The Beginning of Divine</div>
             <div className="story-content">
               <p>
@@ -86,104 +92,117 @@ function About() {
             </div>
           </div>
           <div className="story-right">
-            <img
-              className="story-img1"
-              src="https://images.unsplash.com/photo-1710629622514-61a4fa109f25?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDQ5MXx8fGVufDB8fHx8fA%3D%3D"
-              alt="泡芙"
-            />
-            <img
-              className="story-img2"
-              src="https://plus.unsplash.com/premium_photo-1695028377773-e3673040f2cc?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWFja2luZyUyMGZyZW5jaCUyMGRlc3NlcnR8ZW58MHx8MHx8fDA%3D"
-              alt="裝飾奶油"
-            />
-            <img
-              className="story-img3"
-              src="https://images.unsplash.com/photo-1708319788214-e5033c78c05b?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDQ2MHx8fGVufDB8fHx8fA%3D%3D"
-              alt="奶油擠花"
-            />
+            <div className="img-wrapper-aos" data-aos="zoom-in" data-aos-delay="200">
+              <img
+                className="story-img1"
+                src="https://images.unsplash.com/photo-1710629622514-61a4fa109f25?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDQ5MXx8fGVufDB8fHx8fA%3D%3D"
+                alt="泡芙"
+              />
+            </div>
+            <div className="img-wrapper-aos" data-aos="zoom-in" data-aos-delay="400">
+              <img
+                className="story-img2"
+                src="https://plus.unsplash.com/premium_photo-1695028377773-e3673040f2cc?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWFja2luZyUyMGZyZW5jaCUyMGRlc3NlcnR8ZW58MHx8MHx8fDA%3D"
+                alt="裝飾奶油"
+              />
+            </div>
+            <div className="img-wrapper-aos" data-aos="zoom-in" data-aos-delay="600">
+              <img
+                className="story-img3"
+                src="https://images.unsplash.com/photo-1708319788214-e5033c78c05b?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDQ2MHx8fGVufDB8fHx8fA%3D%3D"
+                alt="奶油擠花"
+              />
+            </div>
           </div>
         </div>
-        <div className="role" ref={containerRef}>
-          <div className="en-left">
-            <div className="code-bg">
-              <div className="image-wrapper">
-                <img
-                  className="code-img"
-                  src="https://plus.unsplash.com/premium_photo-1681336999444-c6fea7f5c36f?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29tcHV0ZXIlMjBvbiUyMHRhYmxlfGVufDB8fDB8fHww"
-                  alt="桌上筆電"
-                />
+        <div className="role-wrapper py-6">
+          <div className="role" ref={containerRef}>
+            <div className="en-left">
+              <div className="code-bg">
+                <div className="image-wrapper">
+                  <img
+                    className="code-img"
+                    src="https://plus.unsplash.com/premium_photo-1681336999444-c6fea7f5c36f?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29tcHV0ZXIlMjBvbiUyMHRhYmxlfGVufDB8fDB8fHww"
+                    alt="桌上筆電"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="maker-right">
+              <div className="maker-bg">
+                <div className="image-wrapper">
+                  <img
+                    className="maker-img"
+                    src="https://plus.unsplash.com/premium_photo-1672192166785-bdf23cd39734?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwMHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="桌上甜點"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="content-overlay">
+              <div className="content-box">
+                <div className="role-title">
+                  A Developer Who Fell in Love with Pâtisserie
+                </div>
+                <p className="main-content">
+                  甜點需要精準比例。程式需要精準邏輯。
+                  <br />
+                  從瀏覽器畫面到烤箱溫度。兩個世界開始慢慢重疊。
+                </p>
               </div>
             </div>
           </div>
-          <div className="maker-right">
-            <div className="maker-bg">
-              <div className="image-wrapper">
-                <img
-                  className="maker-img"
-                  src="https://plus.unsplash.com/premium_photo-1672192166785-bdf23cd39734?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwMHx8fGVufDB8fHx8fA%3D%3D"
-                  alt="桌上甜點"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="content-overlay">
-            <div className="content-box">
-              <div className="role-title">
-                A Developer Who Fell in Love with Pâtisserie
-              </div>
-              <p className="main-content">
-                甜點需要精準比例。程式需要精準邏輯。
+          <div className="role-text-section container py-5 position-relative">
+            <div className="role-content text-start" data-aos="fade-up">
+              <p>
+                Divine 的創辦人曾是一名前端工程師。
                 <br />
-                從瀏覽器畫面到烤箱溫度。兩個世界開始慢慢重疊。
+                <br />
+                每天的工作，是與程式碼、邏輯與系統結構對話。
+                <br />
+                在螢幕前調整每一行細節，只為讓畫面呈現得更加完美。
+                <br />
+                <br />
+                某一天，他發現——
+                <br />
+                <br />
+                法式甜點，其實與寫程式非常相似。
+                <br />
+                <br />
+                甜點需要精準比例。
+                <br />
+                程式需要精準邏輯。
+                <br />
+                <br />
+                甜點需要反覆測試。
+                <br />
+                程式也需要不斷 debug。
+                <br />
+                <br />
+                甜點需要美感。
+                <br />
+                前端設計也是如此。
+                <br />
+                <br />
+                於是，從程式碼到甜點麵糊，
+                <br />
+                從瀏覽器畫面到烤箱溫度。
+                <br />
+                <br />
+                兩個世界開始慢慢重疊。
+                <br />
+                <br />
+                Divine 就在這樣的交會點誕生。
               </p>
             </div>
+            <div className="signature-decoration" data-aos="fade-in" data-aos-delay="500">
+              Divine Pâtisserie
+            </div>
           </div>
         </div>
-        <div className="role-content">
-          <p>
-            Divine 的創辦人曾是一名前端工程師。
-            <br />
-            <br />
-            每天的工作，是與程式碼、邏輯與系統結構對話。
-            <br />
-            在螢幕前調整每一行細節，只為讓畫面呈現得更加完美。
-            <br />
-            <br />
-            某一天，他發現——
-            <br />
-            <br />
-            法式甜點，其實與寫程式非常相似。
-            <br />
-            <br />
-            甜點需要精準比例。
-            <br />
-            程式需要精準邏輯。
-            <br />
-            <br />
-            甜點需要反覆測試。
-            <br />
-            程式也需要不斷 debug。
-            <br />
-            <br />
-            甜點需要美感。
-            <br />
-            前端設計也是如此。
-            <br />
-            <br />
-            於是，從程式碼到甜點麵糊，
-            <br />
-            從瀏覽器畫面到烤箱溫度。
-            <br />
-            <br />
-            兩個世界開始慢慢重疊。
-            <br />
-            <br />
-            Divine 就在這樣的交會點誕生。
-          </p>
-        </div>
-        <div className="art">
-          <div className="story-title">The Art of Choux</div>
-          <div className="section">
+        <div className="art py-5">
+          <div className="story-title mb-5" data-aos="fade-up" >The Art of Choux</div>
+          <div className="section" data-aos="zoom-in-left">
             <div className="img-box">
               <img
                 className="section-img"
@@ -191,7 +210,8 @@ function About() {
                 alt="泡芙麵糰"
               />
             </div>
-            <div className="art-content">
+            <div className="art-content text-start">
+              <div className="product-title">工藝的基礎：Pâte à Choux</div>
               <div className="product-slogan">
                 <p>
                   看似簡單的泡芙，
@@ -209,7 +229,7 @@ function About() {
           <div className="product-slogan">
             我們將泡芙的可能性延伸成多種法式經典：
           </div>
-          <div className="section-anti">
+          <div className="section-anti" data-aos="zoom-in-right">
             <div className="img-box">
               <img
                 className="section-img"
@@ -217,14 +237,14 @@ function About() {
                 alt="泡芙麵糰"
               />
             </div>
-            <div className="art-content">
+            <div className="art-content text-end">
               <div className="product-title">經典榛果巴黎布雷斯特</div>
               <div className="product-slogan">
                 圓形泡芙象徵自行車輪，內餡是濃郁榛果奶油。
               </div>
             </div>
           </div>
-          <div className="section">
+          <div className="section" data-aos="zoom-in-left">
             <div className="img-box">
               <img
                 className="section-img"
@@ -232,14 +252,14 @@ function About() {
                 alt="泡芙麵糰"
               />
             </div>
-            <div className="art-content">
+            <div className="art-content text-start">
               <div className="product-title">法式奶油修女泡芙</div>
               <div className="product-slogan">
                 層層堆疊的泡芙結構，優雅而細緻。
               </div>
             </div>
           </div>
-          <div className="section-anti">
+          <div className="section-anti" data-aos="zoom-in-right">
             <div className="img-box">
               <img
                 className="section-img"
@@ -247,14 +267,14 @@ function About() {
                 alt="泡芙麵糰"
               />
             </div>
-            <div className="art-content">
+            <div className="art-content text-end">
               <div className="product-title">法式閃電泡芙 Éclair</div>
               <div className="product-slogan">
                 細長外型搭配滑順內餡，是巴黎甜點櫥窗的經典。
               </div>
             </div>
           </div>
-          <div className="section">
+          <div className="section" data-aos="zoom-in-left">
             <div className="img-box">
               <img
                 className="section-img"
@@ -262,14 +282,14 @@ function About() {
                 alt="泡芙麵糰"
               />
             </div>
-            <div className="art-content">
+            <div className="art-content text-start">
               <div className="product-title">珍珠糖一口泡芙</div>
               <div className="product-slogan">
                 酥脆外殼與微甜糖粒，帶來輕盈口感。
               </div>
             </div>
           </div>
-          <div className="section-anti">
+          <div className="section-anti" data-aos="zoom-in-right">
             <div className="img-box">
               <img
                 className="section-img"
@@ -277,7 +297,7 @@ function About() {
                 alt="泡芙麵糰"
               />
             </div>
-            <div className="art-content">
+            <div className="art-content text-end">
               <div className="product-title">聖多諾黑焦糖泡芙塔</div>
               <div className="product-slogan">
                 泡芙、焦糖與香草奶油的完美交響。
@@ -290,17 +310,20 @@ function About() {
         </div>
         <div className="handmade">
           <div className="handmade-img-box">
-            <img
-              className="handmade-img-sm"
-              src="https://images.unsplash.com/photo-1667804957728-fefedd4de4c4?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDM4OXx8fGVufDB8fHx8fA%3D%3D"
-              alt="手拿泡芙"
-            />
-
-            <img
-              className="handmade-img-lg"
-              src="https://plus.unsplash.com/premium_photo-1764355177633-7a0755aab91c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YmFraW5nJTIwZWNsYWlyc3xlbnwwfHwwfHx8MA%3D%3D"
-              alt="泡芙"
-            />
+            <div className="img-wrapper-aos" data-aos="zoom-in-up" data-aos-delay="200">
+              <img
+                className="handmade-img-sm"
+                src="https://images.unsplash.com/photo-1667804957728-fefedd4de4c4?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDM4OXx8fGVufDB8fHx8fA%3D%3D"
+                alt="手拿泡芙"
+              />
+            </div>
+            <div className="img-wrapper-aos" data-aos="zoom-in-up" data-aos-delay="400">
+              <img
+                className="handmade-img-lg"
+                src="https://plus.unsplash.com/premium_photo-1764355177633-7a0755aab91c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YmFraW5nJTIwZWNsYWlyc3xlbnwwfHwwfHx8MA%3D%3D"
+                alt="泡芙"
+              />
+            </div>
           </div>
           <div className="handmade-content">
             <div className="story-title handmade-title">

@@ -34,7 +34,7 @@ function Payment() {
       }
     };
     init();
-  }, [showError]);
+  }, []);
 
   const payOrder = async (orderId) => {
     try {

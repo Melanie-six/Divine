@@ -7,6 +7,7 @@ import { getCart } from '../../slice/cartSlice';
 import useMessage from '../../hooks/useMessage';
 import '../../assets/all.css';
 import Pagination from '../../components/Pagination';
+import { Circles } from "react-loader-spinner";
 
 const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
@@ -16,6 +17,7 @@ function Products() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
+  const [isAddingToCart, setIsAddingToCart] = useState(null);
   const { showError, showSuccess } = useMessage();
   const dispatch = useDispatch();
 
@@ -40,7 +42,30 @@ function Products() {
     };
 
     fetchProducts();
-  }, [selectedCategory]);
+  }, [currentPage, selectedCategory]);
+
+  // const fetchProducts = useCallback(async () => {
+  //   try {
+  //     const res = await axios.get(
+  //       `${VITE_API_BASE}/api/${VITE_API_PATH}/products`,
+  //       {
+  //         params: {
+  //           page: currentPage,
+  //           category: selectedCategory === 'all' ? undefined : selectedCategory,
+  //         },
+  //       },
+  //     );
+  //     setProducts(res.data.products);
+  //     setPageInfo(res.data.pagination);
+  //   } catch (error) {
+  //     console.error(error.response);
+  //     showError('獲取產品資訊失敗');
+  //   }
+  // }, [currentPage, selectedCategory, showError]);
+
+  // useEffect(() => {
+  //   fetchProducts();
+  // }, [fetchProducts]);
 
   useEffect(() => {
     const getAllProducts = async () => {
@@ -62,6 +87,9 @@ function Products() {
   }, []);
 
   const addCart = async (id, qty = 1) => {
+    if (isAddingToCart) return;
+    setIsAddingToCart(id);
+
     try {
       const data = {
         product_id: id,
@@ -73,6 +101,8 @@ function Products() {
     } catch (error) {
       console.error(error.response);
       showError('加入購物車失敗');
+    } finally {
+      setIsAddingToCart(null);
     }
   };
 
@@ -133,9 +163,21 @@ function Products() {
                         <button
                           type="button"
                           className="btn-cart"
+                          disabled={isAddingToCart === product.id}
                           onClick={() => addCart(product.id)}
                         >
-                          <i className="bi bi-cart3"></i>
+                          {isAddingToCart === product.id ? (
+                            <Circles
+                              height="20"      // 關鍵：限制高度
+                              width="20"       // 關鍵：限制寬度
+                              color="#1b263b"  // 這裡設定平時按鈕文字的顏色 (深藍)
+                              ariaLabel="circles-loading"
+                              wrapperClass="loader-wrapper" // 方便 CSS 微調
+                            />
+                            ) : (
+                            <i className="bi bi-cart3"></i>
+                            )
+                          }
                         </button>
                       </div>
                     </div>

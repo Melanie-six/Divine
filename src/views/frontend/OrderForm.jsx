@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { getCart } from '../../slice/cartSlice';
 import useMessage from '../../hooks/useMessage';
 import '../../assets/all.css';
+import { Link } from 'react-router';
 
 const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
@@ -35,7 +36,7 @@ function OrderForm() {
       }
     };
     getCart();
-  }, [showError]);
+  }, []);
 
   const onSubmit = async (formData) => {
     // console.log(formData);
@@ -61,6 +62,7 @@ function OrderForm() {
 
   return (
     <>
+    { cart?.carts?.length > 0 ? (<>
       <div className="container-fluid col-md-6 mx-auto">
         <div className="orderForm-title">訂單資訊(Order Info)</div>
         <table className="orderForm-table">
@@ -210,7 +212,18 @@ function OrderForm() {
             送出訂單
           </button>
         </form>
-      </div>
+      </div></>
+    ) : (
+        <div className="container d-flex justify-content-center flex-column align-items-center py-5">
+          <img
+            className="empty-cart"
+            src="https://plus.unsplash.com/premium_photo-1681487985079-b299ac8ba1df?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2FydHxlbnwwfHwwfHx8MA%3D%3D"
+            alt="Empty cart"
+          />
+          <div>購物車已清空，再去看看其他喜歡的甜點吧！</div>
+          <div><Link className="btn-add-to-cart my-3" to="/products">去逛逛</Link></div>
+        </div>
+    ) }
     </>
   );
 }

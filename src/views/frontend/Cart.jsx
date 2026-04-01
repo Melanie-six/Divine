@@ -2,32 +2,23 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Link } from 'react-router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getCart } from '../../slice/cartSlice';
 import useMessage from '../../hooks/useMessage';
 import '../../assets/all.css';
+import { Circles } from "react-loader-spinner";
 
 const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
 function Cart() {
-  const [cart, setCart] = useState([]);
+  const { cart } = useSelector((state) => state.cart);
   const { showError, showSuccess } = useMessage();
+  const [isDeleting, setIsDeleting] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const getCart = async () => {
-      try {
-        const res = await axios.get(
-          `${VITE_API_BASE}/api/${VITE_API_PATH}/cart`,
-        );
-        setCart(res.data.data);
-      } catch (error) {
-        console.error(error.response);
-        showError('獲取購物車資訊失敗');
-      }
-    };
-    getCart();
-  }, [showError]);
+    dispatch(getCart());
+  }, [dispatch]);
 
   const updateQty = async (cartId, productId, qty = 1) => {
     if (qty < 1 || qty > 10) return;
@@ -39,10 +30,7 @@ function Cart() {
       await axios.put(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart/${cartId}`, {
         data,
       });
-      const res2 = await axios.get(
-        `${VITE_API_BASE}/api/${VITE_API_PATH}/cart`,
-      );
-      setCart(res2.data.data);
+      dispatch(getCart());
       showSuccess('已更新商品數量');
     } catch (error) {
       console.error(error.response);
@@ -51,19 +39,19 @@ function Cart() {
   };
 
   const deleteQty = async (cartId) => {
+    if (isDeleting === cartId) return;
+    setIsDeleting(cartId);
     try {
       await axios.delete(
         `${VITE_API_BASE}/api/${VITE_API_PATH}/cart/${cartId}`,
       );
-      const res2 = await axios.get(
-        `${VITE_API_BASE}/api/${VITE_API_PATH}/cart`,
-      );
-      setCart(res2.data.data);
-      showSuccess('已刪除商品');
       dispatch(getCart());
+      showSuccess('已刪除商品');
     } catch (error) {
       console.error(error.response);
       showError('刪除商品失敗');
+    } finally {
+      setIsDeleting(null);
     }
   };
 
@@ -126,9 +114,19 @@ function Cart() {
                   <td>
                     <button
                       className="btn-del-qty"
+                      disabled={isDeleting === item.id}
                       onClick={() => deleteQty(item.id)}
                     >
-                      <i className="bi bi-trash3-fill"></i>
+                      {isDeleting === item.id ? (
+                        <Circles
+                          height="20" 
+                          width="20" 
+                          color="#1b263b" 
+                          ariaLabel="circles-loading"
+                          wrapperClass="loading-wrapper" 
+                        />
+                        ) : (<i className="bi bi-trash3-fill"></i>)
+                      }
                     </button>
                   </td>
                 </tr>
@@ -151,6 +149,11 @@ function Cart() {
         </table>
         ) : (
           <div className=" d-flex justify-content-center flex-column align-items-center">
+            <img
+              className="empty-cart"
+              src="https://plus.unsplash.com/premium_photo-1681487985079-b299ac8ba1df?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2FydHxlbnwwfHwwfHx8MA%3D%3D"
+              alt="Empty cart"
+            />
             <div>購物車空空如也，趕緊去把喜歡的甜點帶回家吧！</div>
             <div><Link className="btn-add-to-cart my-3" to="/products">去逛逛</Link></div>
           </div>

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { getCart } from '../../slice/cartSlice';
+import { Circles } from "react-loader-spinner";
 import useMessage from '../../hooks/useMessage';
 import '../../assets/all.css';
 
@@ -12,6 +13,7 @@ function SingleProduct() {
   const [product, setProduct] = useState({});
   const [qty, setQty] = useState(1);
   const { showError, showSuccess } = useMessage();
+  const [isAddingToCart, setIsAddingToCart] = useState(null);
   const dispatch = useDispatch();
 
   const params = useParams();
@@ -33,6 +35,8 @@ function SingleProduct() {
   }, [id]);
 
   const addCart = async (id, qty = 1) => {
+    if (isAddingToCart) return;
+    setIsAddingToCart(id);
     try {
       const data = {
         product_id: id,
@@ -44,6 +48,8 @@ function SingleProduct() {
     } catch (error) {
       console.error(error.response);
       showError('加入購物車失敗');
+    } finally {
+      setIsAddingToCart(null);
     }
   };
 
@@ -51,7 +57,6 @@ function SingleProduct() {
     <>
       <div className="container theme-dark py-3">
         <div className="product-layout">
-          {/* 左側圖片區 */}
           <div className="product-image-col">
             <div className="image-box">
               <img
@@ -61,8 +66,6 @@ function SingleProduct() {
               />
             </div>
           </div>
-
-          {/* 右側資訊區 */}
           <div className="product-info-col">
             <div className="info-box">
               <h2 className="heading-primary">{product.title}</h2>
@@ -93,9 +96,19 @@ function SingleProduct() {
               
               <button
                 className="btn-add-to-cart mt-4"
+                disabled={isAddingToCart === product.id}
                 onClick={() => addCart(product.id, qty)}
               >
-                Add to Cart
+                {isAddingToCart === product.id ? (
+                  <Circles
+                    height="20" 
+                    width="20" 
+                    color="#1b263b" 
+                    ariaLabel="circles-loading"
+                    wrapperClass="loading-wrapper" 
+                  />
+                  ) : 'Add to Cart'
+                }
               </button>
             </div>
           </div>

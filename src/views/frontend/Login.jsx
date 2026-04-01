@@ -44,57 +44,59 @@ function Login() {
   };
 
   return (
-    <div className="container col-md-4 login">
-      <div className="login-title">由此登入</div>
-      <form className="form-floating" onSubmit={handleSubmit(onSubmit)}>
-        <div className=" mb-3">
-          <label htmlFor="username" className="login-form-label">
-            Email address
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            name="username"
-            placeholder="[ ADMIN ]"
-            {...register('username', {
-              required: '請輸入 Email ',
-              pattern: {
-                value: /^\S+@\S+$/i,
-                message: 'Email 格式不正確',
-              },
-            })}
-          />
+    <div className="login-wrapper d-flex align-items-center justify-content-center">
+      <div className="container col-md-4 login">
+        <div className="login-title text-center">由此登入</div>
+        <form className="form-floating" onSubmit={handleSubmit(onSubmit)}>
+          <div className=" mb-3">
+            <label htmlFor="username" className="login-form-label">
+              Email address
+            </label>
+            <input
+              type="email"
+              className="form-control"
+              name="username"
+              placeholder="[ ADMIN ]"
+              {...register('username', {
+                required: '請輸入 Email ',
+                pattern: {
+                  value: /^\S+@\S+$/i,
+                  message: 'Email 格式不正確',
+                },
+              })}
+            />
 
-          {errors.username && (
-            <p className="text-danger">{errors.username.message}</p>
-          )}
-        </div>
-        <div className="">
-          <label htmlFor="password" className="login-form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            name="password"
-            placeholder="[ ・・・・・・ ]"
-            {...register('password', {
-              required: '請輸入 password ',
-              minLength: {
-                value: 6,
-                message: '密碼長度至少 6 位數',
-              },
-            })}
-          />
+            {errors.username && (
+              <p className="text-danger">{errors.username.message}</p>
+            )}
+          </div>
+          <div className="">
+            <label htmlFor="password" className="login-form-label">
+              Password
+            </label>
+            <input
+              type="password"
+              className="form-control"
+              name="password"
+              placeholder="[ ・・・・・・ ]"
+              {...register('password', {
+                required: '請輸入 password ',
+                minLength: {
+                  value: 6,
+                  message: '密碼長度至少 6 位數',
+                },
+              })}
+            />
 
-          {errors.password && (
-            <p className="text-danger">{errors.password.message}</p>
-          )}
-        </div>
-        <button type="submit" className="btn-add-to-cart mt-3">
-          登入
-        </button>
-      </form>
+            {errors.password && (
+              <p className="text-danger">{errors.password.message}</p>
+            )}
+          </div>
+          <button type="submit" className="btn-add-to-cart mt-3">
+            登入
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
