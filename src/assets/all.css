@@ -208,6 +208,8 @@ body {
 .qty-control {
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 100%;
   gap: 12px;
 }
 
@@ -425,11 +427,11 @@ footer {
   box-shadow: none;
   border-color: var(--color-accent);
 }
-.btn-outline-accent {
+.footer-subscribe .btn-outline-accent {
   border-color: var(--color-accent);
   color: var(--color-accent);
 }
-.btn-outline-accent:hover {
+.footer-subscribe .btn-outline-accent:hover {
   background-color: var(--color-accent);
   color: var(--midnight-blue);
 }
@@ -554,6 +556,9 @@ footer {
 .final-total .text-accent {
   margin-left: 15px;
   font-size: 1.8rem; 
+}
+.text-center .text-accent {
+  color: var(--color-text-main);
 }
 .notfound-container {
   width: 100%;
