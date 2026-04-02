@@ -35,7 +35,7 @@ function Home() {
     };
     AOS.refresh();
     getProducts();
-  }, []);
+  }, [showError]);
 
   const chouxProducts = products.filter((item) => item.category === '泡芙');
 
@@ -131,7 +131,7 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className="brandstory mb-3" data-aos="fade-up">
+      <div className="brandstory mb-3">
         <div className="brandstory-title">The Story Behind Divine</div>
         <div className="brandstory-content">
           Divine 的誕生，來自於兩個世界的交會：工程與甜點。

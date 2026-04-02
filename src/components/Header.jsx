@@ -1,17 +1,29 @@
-import { NavLink } from 'react-router';
+import { NavLink, useLocation } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCart } from '../slice/cartSlice';
+import { Collapse } from 'bootstrap';
 import '../assets/all.css';
 
 function Header() {
   const { cartList } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const location = useLocation();
+  const collapseRef = useRef(null);
+
   useEffect(() => {
     dispatch(getCart());
   }, [dispatch]);
+
+  useEffect(() => {
+    const menu = collapseRef.current;
+    if (menu && menu.classList.contains('show')) {
+      const bsCollapse = new Collapse(menu, { toggle: false });
+      bsCollapse.hide();
+    }
+  }, [location.pathname]);
 
   return (
     <nav className="navbar navbar-expand-lg theme-dark fixed-top navbar-dark">
@@ -33,6 +45,7 @@ function Header() {
         <div
           className="collapse navbar-collapse d-lg-flex"
           id="navbarNavAltMarkup"
+          ref={collapseRef}
         >
           <div className="navbar-nav w-100 d-lg-flex justify-content-between align-items-center">
             <NavLink

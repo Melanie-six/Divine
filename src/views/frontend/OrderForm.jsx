@@ -36,10 +36,9 @@ function OrderForm() {
       }
     };
     getCart();
-  }, []);
+  }, [showError]);
 
   const onSubmit = async (formData) => {
-    // console.log(formData);
     try {
       const data = {
         user: formData,

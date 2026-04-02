@@ -1,25 +1,26 @@
 import { useDispatch } from 'react-redux';
+import { useCallback } from 'react';
 import { createAsyncMessage } from '../slice/messageSlice';
 
 function useMessage() {
   const dispatch = useDispatch();
 
-  const showSuccess = (message) => {
+  const showSuccess = useCallback((message) => {
     dispatch(
       createAsyncMessage({
         success: true,
         message,
       }),
     );
-  };
-  const showError = (message) => {
+  }, [dispatch]);
+  const showError = useCallback((message) => {
     dispatch(
       createAsyncMessage({
         success: false,
         message,
       }),
     );
-  };
+  }, [dispatch]);
   return {
     showSuccess,
     showError,

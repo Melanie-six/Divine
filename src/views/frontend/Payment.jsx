@@ -34,7 +34,7 @@ function Payment() {
       }
     };
     init();
-  }, []);
+  }, [showError]);
 
   const payOrder = async (orderId) => {
     try {
@@ -82,12 +82,6 @@ function Payment() {
                     </span>
                   </td>
                   <td>
-                    {/* <button 
-                                type='button' 
-                                className='btn-add-to-cart' 
-                                onClick={() => payOrder(order.id)}>
-                                    付款去</button> */}
-                    {/* 修改 Payment.jsx 的 map 部分，讓按鈕更有彈性 */}
                     <button
                       type="button"
                       className={
@@ -96,7 +90,6 @@ function Payment() {
                           : 'btn-add-to-cart'
                       }
                       onClick={() => payOrder(order.id)}
-                      // disabled={order.is_paid}
                     >
                       {order.is_paid ? '訂單完成' : '付款去'}
                     </button>
@@ -106,11 +99,6 @@ function Payment() {
             })}
           </tbody>
           <tfoot className="p-3">
-            {/* <tr className="h5 my-3">
-                        <th colSpan="4" className="text-end"><strong>結帳總金額：</strong></th>
-                        <th className="text-danger">{cart.final_total}</th>
-                        <th><Link to="/order" className="btn btn-add-to-cart">結帳去</Link></th>
-                    </tr> */}
           </tfoot>
         </table>
       </div>

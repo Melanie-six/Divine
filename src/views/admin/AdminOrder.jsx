@@ -46,7 +46,6 @@ function AdminOrder() {
           `${VITE_API_BASE}/api/${VITE_API_PATH}/admin/orders?page=${page}`,
         );
         setOrders(res.data.orders);
-        // console.log(res.data.orders);
         showSuccess('訂單列表載入成功');
         setPageInfo(res.data.pagination);
       } catch (error) {
@@ -63,7 +62,6 @@ function AdminOrder() {
         `${VITE_API_BASE}/api/${VITE_API_PATH}/admin/orders?page=${page}`,
       );
       setOrders(res.data.orders);
-      // console.log(res.data.orders);
       showSuccess('訂單列表載入成功');
       setPageInfo(res.data.pagination);
     } catch (error) {

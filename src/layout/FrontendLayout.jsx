@@ -14,11 +14,8 @@ function FrontendLayout() {
   const { isFullPageLoading } = useSelector((state) => state.app);
 
   useEffect(() => {
-    // 1. 每當路徑改變，開啟 Loading
     dispatch(setIsFullPageLoading(true));
 
-    // 2. 設定一個短暫延遲（例如 600ms）讓使用者感受到轉場，然後關閉
-    // 也可以根據 API 資料是否抓完來手動關閉
     const timer = setTimeout(() => {
       dispatch(setIsFullPageLoading(false));
     }, 600);

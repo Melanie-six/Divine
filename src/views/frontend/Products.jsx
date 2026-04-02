@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import AOS from 'aos';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Link } from 'react-router';
 import { useDispatch } from 'react-redux';
@@ -42,30 +43,8 @@ function Products() {
     };
 
     fetchProducts();
-  }, [currentPage, selectedCategory]);
-
-  // const fetchProducts = useCallback(async () => {
-  //   try {
-  //     const res = await axios.get(
-  //       `${VITE_API_BASE}/api/${VITE_API_PATH}/products`,
-  //       {
-  //         params: {
-  //           page: currentPage,
-  //           category: selectedCategory === 'all' ? undefined : selectedCategory,
-  //         },
-  //       },
-  //     );
-  //     setProducts(res.data.products);
-  //     setPageInfo(res.data.pagination);
-  //   } catch (error) {
-  //     console.error(error.response);
-  //     showError('獲取產品資訊失敗');
-  //   }
-  // }, [currentPage, selectedCategory, showError]);
-
-  // useEffect(() => {
-  //   fetchProducts();
-  // }, [fetchProducts]);
+    AOS.init();
+  }, [currentPage, selectedCategory, showError]);
 
   useEffect(() => {
     const getAllProducts = async () => {
@@ -84,7 +63,7 @@ function Products() {
       }
     };
     getAllProducts();
-  }, []);
+  }, [showError]);
 
   const addCart = async (id, qty = 1) => {
     if (isAddingToCart) return;
@@ -107,16 +86,25 @@ function Products() {
   };
 
   const handlePageChange = (page) => {
-    setCurrentPage(page); // 觸發第一個 useEffect 抓取資料
+    setCurrentPage(page); 
     window.scrollTo(0, 0);
   };
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
-    setCurrentPage(1); // 切換分類時，務必重設為第一頁
+    setCurrentPage(1); 
   };
 
   return (
     <>
+      <div className="products-banner mb-5 d-flex flex-column align-items-center justify-content-center">
+        <div className="banner-overlay"></div>
+        <div className="banner-text-box" data-aos="fade-up">
+          <div className="banner-text-box-title">
+            {selectedCategory === 'all' ? 'Our Collection' : selectedCategory}
+          </div>
+          <div className="banner-text-box-text">探索法式甜點的精準工藝</div>
+        </div>
+      </div>
       <div className="container theme-dark">
         <div className="row">
           <div className="sidebar col-lg-3 mb-4">
@@ -168,11 +156,11 @@ function Products() {
                         >
                           {isAddingToCart === product.id ? (
                             <Circles
-                              height="20"      // 關鍵：限制高度
-                              width="20"       // 關鍵：限制寬度
-                              color="#1b263b"  // 這裡設定平時按鈕文字的顏色 (深藍)
+                              height="20" 
+                              width="20"   
+                              color="#1b263b" 
                               ariaLabel="circles-loading"
-                              wrapperClass="loader-wrapper" // 方便 CSS 微調
+                              wrapperClass="loader-wrapper" 
                             />
                             ) : (
                             <i className="bi bi-cart3"></i>
@@ -185,7 +173,7 @@ function Products() {
                 );
               })}
             </div>
-            <div className="d-flex justify-content-center mt-3">
+            <div className="d-flex justify-content-center my-3">
               <Pagination
                 pageInfo={pageInfo}
                 handlePageChange={handlePageChange}

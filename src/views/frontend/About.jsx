@@ -48,7 +48,7 @@ function About() {
             在精準與感性之間，誕生每一顆值得被細細品味的甜點。
           </div>
         </div>
-        <div className="content">
+        <div className="content mt-3">
           <p className="mb-0">Divine 是一間專注於法式甜點的手工甜點品牌。</p>
           <p>
             我們相信，真正令人難忘的甜點，不只是味道的堆疊，而是一種細節、時間與情感的結合。

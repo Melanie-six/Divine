@@ -7,6 +7,10 @@ import { getCart } from '../../slice/cartSlice';
 import useMessage from '../../hooks/useMessage';
 import '../../assets/all.css';
 import { Circles } from "react-loader-spinner";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
@@ -15,10 +19,24 @@ function Cart() {
   const { showError, showSuccess } = useMessage();
   const [isDeleting, setIsDeleting] = useState(null);
   const dispatch = useDispatch();
+  const [allProducts, setAllProducts] = useState([]);
 
   useEffect(() => {
+    const fetchAllProducts = async () => {
+      try {
+        const res = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/products/all`);
+        setAllProducts(res.data.products);
+      } catch (error) {
+        console.error(error.response);
+        showError('獲取產品資訊失敗');
+      }
+    };
+    fetchAllProducts();
     dispatch(getCart());
-  }, [dispatch]);
+  }, [dispatch, showError]);
+  const recommendedProducts = allProducts.filter(
+    (product) => !cart?.carts?.some((cartItem) => cartItem.product_id === product.id)
+  );
 
   const updateQty = async (cartId, productId, qty = 1) => {
     if (qty < 1 || qty > 10) return;
@@ -139,7 +157,7 @@ function Cart() {
                 結帳總金額：
                 <span className="text-accent">${cart.final_total}</span>
               </th>
-              <th>
+              <th colSpan="2">
                 <Link to="/order" className="btn-add-to-cart mx-1">
                   結帳去
                 </Link>
@@ -159,6 +177,48 @@ function Cart() {
           </div>
         )}
       </div>
+      {recommendedProducts.length > 0 && (
+        <div className="recommend-section py-4 mt-5">
+          <div className="container">
+            <h3 className="recommend-title mb-4" data-aos="fade-up">
+              You Might Also Like
+              <small className="recommend-subtitle">為您的甜點時光增添更多驚喜</small>
+            </h3>
+            
+            <Swiper
+              modules={[Autoplay, Pagination]}
+              spaceBetween={20}
+              slidesPerView={1}
+              autoplay={{ delay: 3000, disableOnInteraction: false }}
+              pagination={{ clickable: true }}
+              breakpoints={{
+                640: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+                1200: { slidesPerView: 4 },
+              }}
+              className="recommend-swiper"
+              data-aos="fade-up"
+            >
+              {recommendedProducts.map((product) => (
+                <SwiperSlide key={product.id}>
+                  <div className="recommend-card">
+                    <div className="img-wrapper">
+                      <img src={product.imageUrl} alt={product.title} />
+                      <Link to={`/product/${product.id}`} className="hover-overlay">
+                        View Detail
+                      </Link>
+                    </div>
+                    <div className="p-3 text-center">
+                      <div className="recommend-item-title">{product.title}</div>
+                      <div className="text-accent fw-bold">NT$ {product.price}</div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
+      )}
     </>
   </>  
   );

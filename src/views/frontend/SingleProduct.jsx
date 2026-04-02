@@ -32,7 +32,7 @@ function SingleProduct() {
       }
     };
     fetchProduct();
-  }, [id]);
+  }, [id, showError]);
 
   const addCart = async (id, qty = 1) => {
     if (isAddingToCart) return;

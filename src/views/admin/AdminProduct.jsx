@@ -29,7 +29,6 @@ function AdminProduct() {
   const [templateData, setTemplateData] = useState(Initial_Template_Data);
   const [modalType, setModalType] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const dispatch = useDispatch();
   const { showError, showSuccess } = useMessage();
 
   const handleOpenModal = (type, product) => {
