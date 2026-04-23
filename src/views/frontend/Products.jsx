@@ -19,11 +19,13 @@ function Products() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const [isAddingToCart, setIsAddingToCart] = useState(null);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(false);
   const { showError, showSuccess } = useMessage();
   const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchProducts = async () => {
+      setIsLoadingProducts(true);
       try {
         const res = await axios.get(
           `${VITE_API_BASE}/api/${VITE_API_PATH}/products`,
@@ -39,6 +41,8 @@ function Products() {
       } catch (error) {
         console.error(error.response);
         showError('獲取產品資訊失敗');
+      } finally {
+        setIsLoadingProducts(false);
       }
     };
 
@@ -129,13 +133,20 @@ function Products() {
             </ul>
           </div>
           <div className="main col-lg-9">
+            {isLoadingProducts ? (
+              <div className="d-flex justify-content-center align-items-center products-loading">
+                <Circles height="60" width="60" color="#d4af37" ariaLabel="loading" />
+              </div>
+            ) : (
             <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
               {products?.map((product) => {
                 return (
                   <div className="col" key={product.id}>
                     <div className="productcard">
                       <div className="card-body">
-                        <img src={product.imageUrl} alt={product.title} />
+                        <Link to={`/product/${product.id}`} className="product-img-link">
+                          <img src={product.imageUrl} alt={product.title} />
+                        </Link>
                         <p className="productcard-primary h4">
                           {product.title}
                         </p>
@@ -156,11 +167,11 @@ function Products() {
                         >
                           {isAddingToCart === product.id ? (
                             <Circles
-                              height="20" 
-                              width="20"   
-                              color="#1b263b" 
+                              height="20"
+                              width="20"
+                              color="#1b263b"
                               ariaLabel="circles-loading"
-                              wrapperClass="loader-wrapper" 
+                              wrapperClass="loader-wrapper"
                             />
                             ) : (
                             <i className="bi bi-cart3"></i>
@@ -173,6 +184,7 @@ function Products() {
                 );
               })}
             </div>
+            )}
             <div className="d-flex justify-content-center my-3">
               <Pagination
                 pageInfo={pageInfo}

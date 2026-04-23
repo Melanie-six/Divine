@@ -35,7 +35,7 @@ function Footer() {
               <li className="mb-2">Tue - Sun : 10:00 - 16:00</li>
               <li className="mb-2">Mon : Closed</li>
               <li className="mb-2">Da’an District, Taipei</li>
-              <li>+886 2 1234 5678</li>
+              <li><a href="tel:+886212345678" className="footer-tel-link">+886 2 1234 5678</a></li>
             </ul>
           </div>
           <div className="col-lg-3 col-md-6">

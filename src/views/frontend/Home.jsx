@@ -98,7 +98,9 @@ function Home() {
             {chouxProducts.map((product) => (
               <SwiperSlide key={product.id}>
                 <div className="product-card-home">
-                  <img className="card-img" src={product.imageUrl} alt={product.title} />
+                  <NavLink to={`/product/${product.id}`} className="card-img-wrapper">
+                    <img className="card-img" src={product.imageUrl} alt={product.title} />
+                  </NavLink>
                   <div className="card-overlay">
                     <div className="card-title">{product.title}</div>
                     <NavLink to={`/product/${product.id}`} className="card-btn">View Details</NavLink>

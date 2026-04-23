@@ -157,10 +157,14 @@
   margin-bottom: 10px;
   height: 100%;
 }
-.product-card-home img {
+.card-img-wrapper {
+  display: block;
+  overflow: hidden;
+}
+.card-img-wrapper img {
   transition: transform 0.5s ease;
 }
-.product-card-home:hover img {
+.card-img-wrapper:hover img {
   transform: scale(1.1);
 }
 .card-img {

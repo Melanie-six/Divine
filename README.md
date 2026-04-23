@@ -1,51 +1,96 @@
-# 甜點網站建置專案
+# Divine — 甜點電商網站
 
-2026/4/2修正：
-[v] 產品列表、購物車畫面不足的地方
-[v] ESlint warning
-[v] 修正發布後部分樣式問題
-2026/4/1修正：
-[v] 網頁內容優化
-2026/3/31修正：
-[v] 解決 Hover 跳動
-[v] RWD 跑版修正
-2026/3/30修正：
-[v] 處理 Modal 資料殘留
-[v] 同步購物車數字
-[v] 購物車引導邏輯
-[v] API 錯誤提示
-[v] 路由跳轉置頂
-2026/3/27修正：
-[v] 全域搜尋並刪除 console.log
-[v] 格式統一（2格縮排）
-[v] HTML Meta 設定
-[v] 修正 Dependency 警告
+一個以 React 打造的甜點品牌電商網站，提供完整的前台購物流程與後台管理功能。
 
-已完成工作：
-[v] 決定品牌名稱與網站主色調。
-[v] 建立專案並推送至 GitHub。
-[v] 完成 App.js 的路由配置 (Route Setup)。
-[v] 撰寫基礎組件：Navbar、Footer。
-[v] 準備好 12 項甜點的資料。
-[v] [開發] 完成產品列表頁，確保所有甜點都能正確顯示。
-[v] [Git] 每完成一個核心功能就進行一次 commit。
-[v] [開發] 完成分類篩選切換功能。
-[v] [開發] 完成購物車「新增、刪除、增減數量」的邏輯。
-[v] [開發] 實作單一產品詳細頁面 (Product Detail Page)。
-[v] [測試] 嘗試重複加入同一個甜點，檢查購物車數量是否正確增加而非產生重複列。
-[v] [開發] 完成訂單表單驗證送出訂單功能。
-[v] [開發] 完成訂單管理之編輯與刪除功能。
-[v] [開發] 完成後台登出功能。
-[v] [開發] 完成首頁切版。
-[v] [開發] 完成關於我切版。
-[v] [修正] 完成首頁 RWD 響應式切換。
-[v] [修正] 完成關於我 RWD 響應式切換。
-[v] [修正] 完成產品列表 RWD 響應式切換。
-[v] [Git] 每完成一個核心功能（例如篩選或購物車）就進行一次 commit。
-[v] [修正] 完成 RWD 響應式切換，確保手機版體驗流暢。
-[v] [素材] 替換掉最後的佔位圖 (Placeholder)，完成所有文案校對。
+## 線上預覽
 
-行動清單 (Action Items)
-[ ] [優化] 為網站加入至少 3 處平滑動畫（推薦：進場動畫、購物車展開、按鈕回饋）。
-[ ] [交付] 產生正式的網址，並在不同的裝置（如自己的手機）實際下單測試一次。
-[ ] [Git] 最後一次 commit：chore: finalize project for deployment。
+[https://melanielin.github.io/Divine/](https://melanielin.github.io/Divine/)
+
+## 功能特色
+
+**前台**
+- 首頁：品牌展示、精選商品輪播
+- 商品列表：分類篩選、商品卡片瀏覽
+- 商品詳細頁：規格說明、加入購物車
+- 購物車：數量增減、刪除商品、購物車同步
+- 訂單表單：表單驗證、送出訂單
+- 結帳完成頁
+- 關於我們頁面
+
+**後台**（需登入）
+- 商品管理：新增、編輯、刪除商品
+- 訂單管理：查看、編輯、刪除訂單
+
+## 技術堆疊
+
+| 類別 | 套件 |
+|------|------|
+| 框架 | React 19 |
+| 建構工具 | Vite 7 |
+| 路由 | React Router 7 |
+| 狀態管理 | Redux Toolkit + React Redux |
+| UI 框架 | Bootstrap 5 + Bootstrap Icons |
+| 表單驗證 | React Hook Form |
+| HTTP 請求 | Axios |
+| 動畫 | AOS (Animate On Scroll) |
+| 輪播 | Swiper |
+| 部署 | GitHub Pages (gh-pages) |
+
+## 專案結構
+
+```
+src/
+├── assets/         # 全域樣式 (CSS)
+├── components/     # 共用元件 (Header、Footer、Modal、Toast 等)
+├── hooks/          # 自訂 Hook
+├── layout/         # 前台 / 後台 Layout
+├── routes/         # 路由設定
+├── slice/          # Redux Slices (cart、message、app)
+├── store/          # Redux Store
+└── views/
+    ├── admin/      # 後台頁面 (AdminProduct、AdminOrder)
+    └── frontend/   # 前台頁面 (Home、Products、Cart、OrderForm 等)
+```
+
+## 路由一覽
+
+| 路徑 | 頁面 |
+|------|------|
+| `/` | 首頁 |
+| `/about` | 關於我們 |
+| `/products` | 商品列表 |
+| `/product/:id` | 商品詳細頁 |
+| `/cart` | 購物車 |
+| `/order` | 訂單表單 |
+| `/pay` | 結帳完成 |
+| `/login` | 後台登入 |
+| `/admin/products` | 後台商品管理 |
+| `/admin/orders` | 後台訂單管理 |
+
+## 安裝與執行
+
+```bash
+# 安裝依賴
+npm install
+
+# 開發模式
+npm run dev
+
+# 建構正式版本
+npm run build
+
+# 預覽建構結果
+npm run preview
+
+# 部署至 GitHub Pages
+npm run deploy
+```
+
+## 環境設定
+
+於專案根目錄建立 `.env` 檔案，填入 API 相關設定：
+
+```env
+VITE_APP_URL=你的_API_BASE_URL
+VITE_APP_PATH=你的_API_PATH
+```

@@ -201,18 +201,15 @@ function Cart() {
             >
               {recommendedProducts.map((product) => (
                 <SwiperSlide key={product.id}>
-                  <div className="recommend-card">
+                  <Link to={`/product/${product.id}`} className="recommend-card">
                     <div className="img-wrapper">
                       <img src={product.imageUrl} alt={product.title} />
-                      <Link to={`/product/${product.id}`} className="hover-overlay">
-                        View Detail
-                      </Link>
                     </div>
                     <div className="p-3 text-center">
                       <div className="recommend-item-title">{product.title}</div>
                       <div className="text-accent fw-bold">NT$ {product.price}</div>
                     </div>
-                  </div>
+                  </Link>
                 </SwiperSlide>
               ))}
             </Swiper>
