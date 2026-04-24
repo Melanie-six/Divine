@@ -147,7 +147,7 @@ function Products() {
                         <Link to={`/product/${product.id}`} className="product-img-link">
                           <img src={product.imageUrl} alt={product.title} />
                         </Link>
-                        <p className="productcard-primary h4">
+                        <p className="productcard-primary">
                           {product.title}
                         </p>
                         <p className="productcard-price">$ {product.price}</p>

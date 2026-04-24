@@ -123,7 +123,7 @@ function SingleProduct() {
 
               <div className="product-meta mb-3">
                 <p className="text-description mb-1">單位：{product.unit}</p>
-                <p className="text-price h3 mt-2">NT ${product.price}</p>
+                <p className="text-price mt-2">NT ${product.price}</p>
               </div>
 
               <div className="num-control mt-2">
