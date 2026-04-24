@@ -172,7 +172,7 @@ function Cart() {
               src="https://plus.unsplash.com/premium_photo-1681487985079-b299ac8ba1df?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2FydHxlbnwwfHwwfHx8MA%3D%3D"
               alt="Empty cart"
             />
-            <div>購物車空空如也，趕緊去把喜歡的甜點帶回家吧！</div>
+            <div className="text-color-white">購物車空空如也，趕緊去把喜歡的甜點帶回家吧！</div>
             <div><Link className="btn-add-to-cart my-3" to="/products">去逛逛</Link></div>
           </div>
         )}

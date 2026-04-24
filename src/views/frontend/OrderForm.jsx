@@ -207,7 +207,7 @@ function OrderForm() {
               {...register('message')}
             />
           </div>
-          <button type="submit" className="btn btn-add-to-cart">
+          <button type="submit" className="btn-add-to-cart">
             送出訂單
           </button>
         </form>

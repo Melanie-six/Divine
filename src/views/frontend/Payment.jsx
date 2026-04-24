@@ -114,7 +114,7 @@ function Payment() {
                     {order.is_paid ? '已付款' : '待付款'}
                   </span>
                   <span className="order-id">{formatOrderId(order.id)}</span>
-                  <span className="order-date">{formatDate(order.create_at)}</span>
+                  <span className="order-date text-color-white">{formatDate(order.create_at)}</span>
                 </div>
                 <div className="order-header-right">
                   <span className="order-summary">
@@ -137,7 +137,7 @@ function Payment() {
                         />
                         <div className="order-item-info">
                           <div className="order-item-name">{item.product?.title}</div>
-                          <div className="order-item-category">{item.product?.category}</div>
+                          <div className="order-item-category text-color-white">{item.product?.category}</div>
                         </div>
                         <div className="order-item-qty">x {item.qty}</div>
                         <div className="order-item-price">NT$ {item.final_total}</div>
@@ -145,7 +145,7 @@ function Payment() {
                     ))}
                   </div>
                   <div className="order-card-footer">
-                    <div className="order-footer-total">
+                    <div className="order-footer-total text-color-white">
                       訂單總計：<span className="order-total-amount">NT$ {order.total}</span>
                     </div>
                     {!order.is_paid && (

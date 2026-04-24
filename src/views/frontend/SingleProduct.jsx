@@ -184,7 +184,7 @@ function SingleProduct() {
                     </NavLink>
                     <div className="related-card-body">
                       <div className="recommend-item-title">{related.title}</div>
-                      <div className="text-accent fw-bold mb-3">NT$ {related.price}</div>
+                      <div className="recommend-item-content text-accent fw-bold mb-3">NT$ {related.price}</div>
                       <div className="related-card-actions">
                         <NavLink to={`/product/${related.id}`} className="related-btn-view">
                           查看詳情
