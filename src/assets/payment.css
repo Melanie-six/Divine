@@ -1,171 +1,287 @@
 :root {
-  /* 核心色彩 (Core Colors) */
-  --midnight-blue: #1b263b; /* 主色 / 深色背景 */
-  --champagne-gold: #d4af37; /* 強調色 / 標題色 */
-  --cream-white: #f5f5f0; /* 背景色 / 淺色模式文字 */
-
-  /* 語義化命名 - 前台預設 (Dark Theme) */
+  --midnight-blue: #1b263b;
+  --champagne-gold: #d4af37;
+  --cream-white: #f5f5f0;
   --color-primary: var(--midnight-blue);
   --color-accent: var(--champagne-gold);
   --color-bg: var(--midnight-blue);
   --color-text-main: var(--cream-white);
   --color-text-title: var(--champagne-gold);
-
-  /* 字體設定 (Typography) */
   --font-serif: 'Playfair Display';
   --font-mono: 'Fira Code', monospace;
   --font-title: 'Songti TC', 'Source Han Serif TC';
-  --font-body:
-    'PingFang TC', 'Source Han Sans TC', 'Microsoft JhengHei', sans-serif;
+  --font-body: 'PingFang TC', 'Source Han Sans TC', 'Microsoft JhengHei', sans-serif;
 }
 
-.payment-table {
-  background-color: var(--midnight-blue);
-  border: 2px solid var(--color-accent);
-  border-radius: 5px;
-  overflow: hidden;
-  font-family: var(--font-mono);
-  margin: 2rem auto;
-  width: 100%;
-}
-.payment-title,
-.cart-title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: var(--color-text-main);
-}
-.payment-table-header {
-  background-color: var(--color-accent);
-  color: var(--midnight-blue);
-  font-size: 1.2rem;
-  font-family: var(--font-mono);
-}
-.payment-table-body {
+.order-loading {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  padding: 15px 20px;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.5);
-  color: var(--cream-white);
-  transition: background-color 0.3s;
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-  }
+  min-height: 400px;
 }
-.btn-add-to-cart {
-  display: block;
-  width: 100%;
-  padding: 12px 24px;
+
+/* ── 訂單列表 ── */
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 3rem;
+}
+
+/* ── 訂單卡片 ── */
+.order-card {
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+.order-card--unpaid {
+  border: 1px solid rgba(212, 175, 55, 0.5);
+}
+.order-card--paid {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.order-card--paid .order-card-header {
+  opacity: 0.65;
+}
+
+/* ── 卡片 Header（可點擊） ── */
+.order-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.03);
+  transition: background-color 0.2s ease;
+  user-select: none;
+  flex-wrap: wrap;
+  gap: 8px;
+  outline: none;
+}
+.order-card-header:hover {
+  background-color: rgba(255, 255, 255, 0.07);
+}
+.order-card-header:focus-visible {
+  outline: 1px solid var(--color-accent);
+}
+
+.order-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.order-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ── 狀態徽章 ── */
+.order-status-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+.badge--unpaid {
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  background-color: rgba(212, 175, 55, 0.1);
+}
+.badge--paid {
+  border: 1px solid rgba(110, 200, 110, 0.5);
+  color: #6ec86e;
+  background-color: rgba(110, 200, 110, 0.08);
+}
+
+.order-id {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--color-text-main);
+  letter-spacing: 1px;
+}
+.order-date {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  opacity: 0.45;
+}
+.order-summary {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  opacity: 0.65;
+}
+.order-total-amount {
+  color: var(--color-accent);
+  font-weight: bold;
+}
+.order-chevron {
+  color: var(--color-accent);
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+/* ── 展開區域 ── */
+.order-card-body {
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* ── 商品列表 ── */
+.order-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+}
+.order-item-img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  flex-shrink: 0;
+}
+.order-item-info {
+  flex: 1;
+  min-width: 0;
+}
+.order-item-name {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--color-text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.order-item-category {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  opacity: 0.45;
+  margin-top: 2px;
+}
+.order-item-qty {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+.order-item-price {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--color-accent);
+  flex-shrink: 0;
+  min-width: 90px;
+  text-align: right;
+}
+
+/* ── 卡片 Footer ── */
+.order-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.order-footer-total {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* ── 付款按鈕 ── */
+.btn-pay-order {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 32px;
+  min-height: 44px;
   cursor: pointer;
   transition: all 0.3s ease;
   background-color: transparent;
   color: var(--color-text-title);
   border: 1px solid var(--color-accent);
   font-family: var(--font-serif);
-  font-size: 1.1rem;
+  font-size: 1rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-  text-align: center;
 }
-.btn-add-to-cart:hover {
+.btn-pay-order:hover {
   background-color: var(--color-accent);
   color: var(--color-primary);
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
   font-weight: bold;
 }
-.btn-order-completed {
-  display: block;
-  width: 100%;
-  padding: 12px 24px;
-  transition: all 0.3s ease;
-  background-color: transparent;
-  color: var(--color-text-main);
-  opacity: 0.5;
+.btn-pay-order:disabled {
   cursor: not-allowed;
-  border: 1px solid var(--color-text-main);
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  text-align: center;
+  opacity: 0.7;
 }
 
+/* ── 空狀態 ── */
+.order-empty-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  border: 1px dashed rgba(212, 175, 55, 0.3);
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+.order-empty-icon {
+  font-size: 4rem;
+  color: var(--color-accent);
+  opacity: 0.35;
+  margin-bottom: 1rem;
+}
+.order-empty-text {
+  font-family: var(--font-body);
+  color: var(--color-text-main);
+  opacity: 0.55;
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+}
+.order-empty-btn {
+  display: inline-flex;
+  width: auto;
+  text-decoration: none;
+}
+
+/* ── RWD ── */
 @media (max-width: 768px) {
-  .payment-table thead {
-    display: none;
+  .order-card-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  .payment-table,
-  .payment-table tbody,
-  .payment-table .payment-table-body {
-    display: block;
+  .order-header-right {
     width: 100%;
-    border: none;
+    justify-content: space-between;
   }
-  .payment-table .payment-table-body {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    border-radius: 12px;
-    margin-bottom: 1.2rem;
-    padding: 0.5rem;
-    display: grid;
-    grid-template-columns: 40% 30% 30%;
-    grid-template-areas:
-      'id      time   button'
-      'name    amount button';
-    gap: 1px 2px;
-    align-items: center;
+  .order-item {
+    flex-wrap: wrap;
   }
-  .payment-table td {
-    display: block;
-    padding: 0 !important;
-    border: none !important;
-    background: none !important;
+  .order-item-price {
+    margin-left: auto;
+    min-width: auto;
   }
-  .payment-table td:nth-child(1) {
-    grid-area: id;
-    font-size: 1rem;
-    font-family: var(--font-mono);
-    word-break: break-all;
+  .order-card-footer {
+    flex-direction: column;
+    align-items: stretch;
   }
-  .payment-table td:nth-child(2) {
-    grid-area: time;
-    opacity: 0.5;
-    font-size: 0.9rem;
-    color: var(--cream-white);
-  }
-  .payment-table td:nth-child(3) {
-    grid-area: name;
-    font-size: 1rem;
-    word-break: auto;
-  }
-  .payment-table td:nth-child(3)::before {
-    content: '收件人： ';
-    color: var(--color-accent);
-    font-size: 0.85rem;
-  }
-  .payment-table td:nth-child(4) {
-    grid-area: amount;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: var(--color-accent);
-  }
-  .payment-table td:nth-child(4)::before {
-    content: '$ ';
-    font-size: 1rem;
-  }
-  .payment-table td:nth-child(5) {
-    display: none;
-  }
-  .payment-table td:nth-child(6) {
-    grid-area: button;
-    justify-self: end;
-  }
-  .payment-table .btn-add-to-cart,
-  .btn-order-completed {
-    width: 100px;
-    padding: 8px 5px;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    border-radius: 6px;
-    white-space: nowrap;
+  .btn-pay-order {
+    width: 100%;
   }
 }
